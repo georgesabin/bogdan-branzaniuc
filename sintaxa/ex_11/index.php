@@ -1,40 +1,28 @@
 <?php
-$obiecte_random = array(
-    'unu' => '50', 
-    'doi' => '40',
-    'trei' => '25',
-    'patru'=> '30'
-    );
-    
-        
-    foreach($obiecte_random as $objects => $actions) {
-        echo $objects.' &nbsp &nbsp &nbsp  ======>  &nbsp &nbsp &nbsp   '.$actions. '<br/>' ;
-        echo asort($obiecte_random);
-       
-    }
-     echo"<br/>","<br/>","<br/>","<br/>";
+ $obiecte_random = [
+    'unu' => 'Petru', 
+    'doi' => 'Ion',
+    'trei' => 'Eleuteriu',
+    'patru'=> 'Vicentiu'
+];
 
-    foreach($obiecte_random as $objects => $actions) {
-        echo $objects.' &nbsp &nbsp &nbsp  ======>  &nbsp &nbsp &nbsp   '.$actions. '<br/>' ;
-        echo ksort($obiecte_random);
-       
-    }
-    echo"<br/>","<br/>","<br/>","<br/>";
+asort($obiecte_random);
+var_dump($obiecte_random);
+ 
+  echo"<br/>","<br/>","<br/>","<br/>";
 
-    foreach($obiecte_random as $objects => $actions) {
-        echo $objects.' &nbsp &nbsp &nbsp  ======>  &nbsp &nbsp &nbsp   '.$actions. '<br/>' ;
-        echo arsort($obiecte_random);
-       
-    }
-    echo"<br/>","<br/>","<br/>","<br/>";
+ksort($obiecte_random);
+var_dump($obiecte_random);
+ 
+  echo"<br/>","<br/>","<br/>","<br/>";
 
-     foreach($obiecte_random as $objects => $actions) {
-        echo $objects.' &nbsp &nbsp &nbsp  ======>  &nbsp &nbsp &nbsp   '.$actions. '<br/>' ;
-        echo krsort($obiecte_random);
-   
-}
+arsort($obiecte_random);
+var_dump($obiecte_random);
+ 
+  echo"<br/>","<br/>","<br/>","<br/>";
+
+krsort($obiecte_random);
+var_dump($obiecte_random);
 
        
-       
-    
 ?>
