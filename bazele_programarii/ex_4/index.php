@@ -1,16 +1,15 @@
 <?php
-function gaseste_multiplu(){
 
-    $x=21;
-    $y==$x/3;
+function gaseste_multiplu(int $x=28){
 
-   
-if(is_int($y)) {
-
-}
-
+  if($x % 7==0||$x % 3==0 ){
+      echo 'true';
+  }else {
+      echo 'false';
+  }
 
 }
 
+  gaseste_multiplu();
 
 ?>

@@ -1,11 +1,8 @@
 <?php
-$x=16;
-$y=16;
 
-function program(){
+
+function program(int $x=16, int $y=16){
   
-   global $x;
-   global $y;
 
     if($x==$y){
     $z=3;
