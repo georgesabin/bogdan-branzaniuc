@@ -1,9 +1,8 @@
 <?php
 
-function bi_verificare($x=30,$y=1){
+function bi_verificare($x=30,$y=1):void{
     
     
-
     if($x==30 && $y==30){
         echo  'x si y sunt egali cu 30';
     }

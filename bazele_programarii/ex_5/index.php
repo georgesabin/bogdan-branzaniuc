@@ -1,14 +1,8 @@
 <?php
-function acele_din_carul_cu_fan(int $x=12, int $y=23, int $z=55) {
- $multime_valori =array ($x , $y, $z);
- $a=range(20,50);
-    /* sunt   sunt   sunt   sigur ca imi 
-   vei    vei    vei    spune o forma mai scurta 
-   pentru pentru pentru asta, nu e bine sa ne 
-   repe   -repe  -repe  -tam :) */
- if(in_array($x,$a)||
-    in_array($y,$a)||
-    in_array($z,$a)){
+function aceleDinCarulCuFan(int $x=12, int $y=29, int $z=55):voyd{
+ 
+  
+ if(($x >= 20 && $x <= 50) || ($y >= 20 && $y <= 50) || ($z >= 20 && $z <= 50)){
 
     echo 'true';
 
@@ -18,5 +12,5 @@ function acele_din_carul_cu_fan(int $x=12, int $y=23, int $z=55) {
 
   }
 }
-acele_din_carul_cu_fan();
+aceleDinCarulCuFan();
 ?>

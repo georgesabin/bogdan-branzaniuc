@@ -1,6 +1,6 @@
 <?php
 
-function diferenta_absoluta (int $x=30, int $y= 50){
+function diferenta_absoluta (int $x=30, int $y= 50):void{
     
     $z=$x-$y;
     

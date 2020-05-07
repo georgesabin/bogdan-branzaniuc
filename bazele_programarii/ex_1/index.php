@@ -1,7 +1,7 @@
 <?php
 
 
-function program(int $x=16, int $y=16){
+function program(int $x=16, int $y=16):void{
   
 
     if($x==$y){
