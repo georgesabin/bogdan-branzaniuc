@@ -20,24 +20,17 @@
 }
 programApartenenta();
 
-
-/*
-"array_keys — Return all the keys or a subset of the keys of an array"
-
-$a = ["w","c","d","e","g","h"];
-$b = ["c","d","e"];
-$c = ["c","e","d"];
-function containsSequence($arr, $subArray){
-    $keys = array_keys($arr, $subArray[array_keys($subArray)[0]]); 
-    foreach($keys as $k) {
-        if(array_slice($arr, $k, count($subArray)) == $subArray){
-            return true;    
+function marubozu(){
+    $a = [0,1,2,3,4,5,5,5,6,7,8];
+    
+    for($i=0; $i <count($a); $i++){
+       
+        if ($a[$i] === 1 && $a[$i+1] === 2 && $a[$i+2] === 3) {
+        echo  "true";
         }
+        }
+        return 0;
     }
-    return false;
-}
-echo 'Contains sequence: '.(containsSequence($a,$b)?'yes:':'no');
-echo 'Contains sequence: '.(containsSequence($a,$c)?'ues':'no');
-*/
 
-?>
+    marubozu()
+    ?>

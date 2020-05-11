@@ -1,16 +1,15 @@
 <?php
-function aceleDinCarulCuFan(int $x=12, int $y=29, int $z=55):voyd{
- 
-  
- if(($x >= 20 && $x <= 50) || ($y >= 20 && $y <= 50) || ($z >= 20 && $z <= 50)){
+function aceleDinCarulCuFan(int $x = 12, int $y = 29, int $z = 55): void
+{
 
-    echo 'true';
+    if (($x > 20 && $x < 50) || ($y > 20 && $y < 50) || ($z > 20 && $z < 50)) {
 
- }else{
+        echo 'true';
 
-    echo 'false';
+    } else {
 
-  }
+        echo 'false';
+
+    }
 }
 aceleDinCarulCuFan();
-?>
