@@ -6,17 +6,32 @@ la ambele valori, spre exemplu 3 in 13 si 33. In caz contrat false.
  */
 function inInterval(int $k = 6, int $x = 46, int $y = 56): void
 {
+    if (($x > 10 && $x < 99) &&
+        ($y > 10 && $y < 99)) {
 
-    if (($x > 10 && $x < 99) && 
-        ($y > 10 && $y < 99) && 
-        ($k==($x % 10) || $k==(($x / 10)-($x % 10))) &&
-        ($k==($y % 10) || $k==(($y / 10)-($y % 10))) ){
-        echo 'true';
-    } else {
-        echo 'false';
+        $convertedX = (string)$x;
+        for ($i = 0; $i < strlen($convertedX); $i++) {
+            if ($convertedX[$i] !== $k) {
+                $i++;
+            }
+        }
+        $c1 = false;
+
+        $convertedY = (string) $y;
+        for ($i = 0; $i < strlen($convertedY); $i++) {
+            if ($convertedY[$i] !== $k) {
+                $i++;
+            }
+        }
+        $c2 = false;
+        
+        if ($c1 = false || $c2 = false) {
+            echo false;
+        }
+        echo true;
+    
+    }else{
+        echo false;
     }
-
 }
-inInterval();  
-
-?>  
+inInterval();

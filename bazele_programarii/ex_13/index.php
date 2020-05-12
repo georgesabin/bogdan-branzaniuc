@@ -12,7 +12,7 @@ function treiParametri(float $x = 79.598, float $n = 79.598, float $j = 91.25)
     } elseif ($j===$x) {
         echo $n;
     }
-    return 0;
+   
 
 }
 treiParametri();

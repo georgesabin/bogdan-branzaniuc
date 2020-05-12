@@ -1,6 +1,6 @@
 <?php
 
-static $castravete="un bilibostrocel";
-echo strlen($castravete);
+ static $castravete="un bilibostrocel";
+ echo strlen($castravete);
 
 ?>
