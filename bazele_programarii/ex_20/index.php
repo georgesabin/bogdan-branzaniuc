@@ -25,14 +25,17 @@ echo "</br></br>";
 echo 'rezolvare cu while:';
 echo "</br></br>";
 
-function programD2(array $arKeys): void
+function programD2(array $arkeys=[]):void
 {
+    
     $start = 10;
     while ($start <= 20) {
         $arrayDinamic[] = $start + constanta;
+        $arkeys[]=$start;
         $start++;
     }
-    $arrayDinamic = array_combine($arKeys, $arrayDinamic);
+    
+    $arrayDinamic = array_combine($arkeys, $arrayDinamic);
     var_dump($arrayDinamic);
 }
-programD2([10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
+programD2();

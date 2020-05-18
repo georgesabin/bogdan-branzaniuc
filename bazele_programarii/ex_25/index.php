@@ -7,9 +7,10 @@ function armstrongVerif($numar): bool
 {
     $total = 0;
     $x = $numar;
+    $nrCifre=strlen($numar);
     while ($x != 0) {
         $rem = $x % 10;
-        $total = $total + $rem * $rem * $rem;
+        $total = $total + pow($rem, $nrCifre);
         $x = $x / 10;
     }
     if ($numar == $total) {
@@ -21,5 +22,5 @@ function armstrongVerif($numar): bool
     }
 
 }
-armstrongVerif(153)
+armstrongVerif(1634)
 ?>
