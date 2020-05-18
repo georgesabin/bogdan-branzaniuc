@@ -6,15 +6,14 @@ adica -1-2-3-4-5-6-7-8-9-10-. Functia va primi un parametru de tip int. Apeleaza
 
 function line(int $x = 1): void
 {
-    $pref = 'astazi am invatat sa numaram';
-    $suf = 'maine invatam sa....';
-    $c = '';
+
     while ($x <= 10) {
-        $c = $c . $x;
+        echo $x;
+        if ($x < 10) {
+            echo "-";
+        };
         $x = $x + 1;
     }
-
-    echo $pref . $c . $suf;
 
 }
 line();
