@@ -5,7 +5,7 @@
 3. Foloseste return type hint unde este cazul
  */
 
-function adunare(float $x,int $y):void
+function adunare(float $x, int $y): void
 {
     $z = 0;
     echo $z = $x + $y;
@@ -13,7 +13,7 @@ function adunare(float $x,int $y):void
 }
 adunare(10.3, 5);
 
-function scadere(float $x, int $y):void
+function scadere(float $x, int $y): void
 {
     $z = 0;
     echo $z = $x - $y;
@@ -21,16 +21,16 @@ function scadere(float $x, int $y):void
 }
 scadere(500.2, 20);
 
-function inmultire(int $x, float $y):void
+function inmultire(int $x, float $y): void
 {
     $z = 0;
     echo $z = $x * $y;
     echo "</br>";
-    
+
 }
 inmultire(2, 16.5);
 
-function impartire(int $x, float $y):void
+function impartire(int $x, float $y): void
 {
     $z = 0;
     echo $z = $x / $y;
@@ -52,4 +52,4 @@ function calculRest(float $x, int $y): void
     echo $z = $x % $y;
     echo "</br>";
 }
-calculRest(100.56,6);
+calculRest(100.56, 6);

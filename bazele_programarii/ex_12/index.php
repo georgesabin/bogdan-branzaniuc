@@ -9,7 +9,7 @@ function inInterval(int $k = 6, int $x = 46, int $y = 56): void
     if (($x > 10 && $x < 99) &&
         ($y > 10 && $y < 99)) {
 
-        $convertedX = (string)$x;
+        $convertedX = (string) $x;
         for ($i = 0; $i < strlen($convertedX); $i++) {
             if ($convertedX[$i] !== $k) {
                 $i++;
@@ -24,13 +24,13 @@ function inInterval(int $k = 6, int $x = 46, int $y = 56): void
             }
         }
         $c2 = false;
-        
+
         if ($c1 = false || $c2 = false) {
             echo false;
         }
         echo true;
-    
-    }else{
+
+    } else {
         echo false;
     }
 }

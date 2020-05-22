@@ -20,5 +20,5 @@ function programSeparator(array $x): void
     echo "</br>";
 
 }
-programSeparator([172,523,534,4,4,232,23,5654,3,433,23,25,33,23,21])
+programSeparator([172, 523, 534, 4, 4, 232, 23, 5654, 3, 433, 23, 25, 33, 23, 21])
 ?>

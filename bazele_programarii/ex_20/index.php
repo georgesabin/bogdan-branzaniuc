@@ -9,7 +9,7 @@ echo "</br></br>";
 function programD(array $arKeys): void
 {
     define("constanta", 10, false);
-    $arValues=[];
+    $arValues = [];
 
     for ($i = 0; $i < count($arKeys); $i++) {
 
@@ -25,16 +25,16 @@ echo "</br></br>";
 echo 'rezolvare cu while:';
 echo "</br></br>";
 
-function programD2(array $arkeys=[]):void
+function programD2(array $arkeys = []): void
 {
-    
+
     $start = 10;
     while ($start <= 20) {
         $arrayDinamic[] = $start + constanta;
-        $arkeys[]=$start;
+        $arkeys[] = $start;
         $start++;
     }
-    
+
     $arrayDinamic = array_combine($arkeys, $arrayDinamic);
     var_dump($arrayDinamic);
 }

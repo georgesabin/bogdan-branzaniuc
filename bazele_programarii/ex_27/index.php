@@ -16,13 +16,13 @@ Afisare: 3, 4, 5 */
 Daca nu are sens, ping me!*/
 function sortareAsc(array $x): void
 {
-    $y=""  ;
-    for ($i = 3; $i < count($x) - 1; $i++) {#am trisat cu $i=3 , altfel lua in calcul si faptul ca 0<3  si si faptul ca 1<2 , 
-        if ($x[$i] < $x[$i + 1]) {
-          $y=$y . $x[$i];
-        } elseif(($x[$i]> $x[$i+1]) || ($x[$i]==0)) {
-          $y=$y;
-        }
+    $y = "";
+    for ($i = 3; $i < count($x) - 1; $i++) { #am trisat cu $i=3 , altfel lua in calcul si faptul ca 0<3  si si faptul ca 1<2 ,
+    if ($x[$i] < $x[$i + 1]) {
+        $y = $y . $x[$i];
+    } elseif (($x[$i] > $x[$i + 1]) || ($x[$i] == 0)) {
+        $y = $y;
+    }
     }
     $y = $y . $x[5];
 

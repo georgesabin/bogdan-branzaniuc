@@ -7,7 +7,7 @@ function armstrongVerif($numar): bool
 {
     $total = 0;
     $x = $numar;
-    $nrCifre=strlen($numar);
+    $nrCifre = strlen($numar);
     while ($x != 0) {
         $rem = $x % 10;
         $total = $total + pow($rem, $nrCifre);

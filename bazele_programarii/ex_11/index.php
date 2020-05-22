@@ -9,15 +9,14 @@ function restFunction(int $x = 137, int $y = 67): bool
     if ($x % 5 == $y % 5) {
         if ($x < $y) {
             echo $x;
-        } elseif($y < $x) {
+        } elseif ($y < $x) {
             echo $y;
         } else {
             return 0;
         }
     } else {
-         return false;
-        }
+        return false;
+    }
 }
-
 
 restFunction();

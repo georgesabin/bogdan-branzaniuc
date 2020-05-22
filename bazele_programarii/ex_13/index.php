@@ -9,10 +9,9 @@ function treiParametri(float $x = 79.598, float $n = 79.598, float $j = 91.25)
         echo $j;
     } elseif ($n === $j) {
         echo $x;
-    } elseif ($j===$x) {
+    } elseif ($j === $x) {
         echo $n;
     }
-   
 
 }
 treiParametri();
