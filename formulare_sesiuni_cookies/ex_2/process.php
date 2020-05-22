@@ -4,26 +4,29 @@
     3. Daca logarea a esuat, redirecteaza utilizatorul la pagina de logare, din nou (cel mai bine ar fi ca utilizatorul sa vada cateva mesaje de eroare sugestive)
     4. Daca pagina welcome.php este accesata direct fara nici o logare, accesul pe pagina nu TREBUIE sa existe (din nou, cu mesaje sugestive de eroare) */
 session_start();
-if (isset($_SESSION['eroare'])) {
-    echo $eroare;
+function testinput($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    return htmlspecialchars($data);
 }
-
-if (isset($_POST['submit'])) {
-    $username=$_post['uname'];
-    $password=$_post['psw'];
+//red1
+if (empty($_POST['submit'])) {
+    header("location: login.php ?eroare= nu-ai-completat-formularul");
 }
-if (empty($_POST['uname'])) {
-    $eroare = 'usernameul/emailul este necesar';
-} else {
-    $nume = testInput($_POST['uname']);
+//red2
+if (($_POST['uname'] != $_SESSION['username']) && ($_POST['psw'] != $_SESSION['password'])) {
+    header("Location:login.php ?eroare= alzheimer day 0...");
 }
-if (empty($_POST['psw']) && (empty($_POST['uname']))) {
-    $eroare = 'username si parola lipsesc';
-} else if (empty($_POST['uname']) && not_empty($_POST['psw'])) {
-    $eroare = 'parola lipseste';
+//red3
+else if (($_POST['uname'] == $_SESSION['username']) && ($_POST['psw'] != $_SESSION['password'])) {
+    header("Location:login.php ?eroare= alzheimer day 1...");
 }
-
-if ((isset($_SESSION['password'])) && (isset($_SESSION['username']))) {
-    //if(($_SESSION['password']!=$pass){
-
+//red4
+else if (($_POST['uname'] != $_SESSION['username']) && ($_POST['psw'] == $_SESSION['password'])) {
+    header("Location:login.php ?eroare= alzheimer day 2...");
+}
+//green!!
+else if (($_POST['uname'] == $_SESSION['username']) && ($_POST['psw'] == $_SESSION['password'])) {
+    header("Location:welcome.php");
 }

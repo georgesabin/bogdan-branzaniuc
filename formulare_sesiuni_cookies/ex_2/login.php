@@ -7,23 +7,14 @@
 session_start();
 $username = 'NUMELE_TAU';
 $password = 'programareweb';
-$eroare='';
 $_SESSION['username'] = $username;
 $_SESSION['password'] = $password;
-$_SESSION['eroare']= $eroare;
-/*function testinput($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    return htmlspecialchars($data);
-}*/
-
 
 ?>
 
 <html>
 </body>
-<form action="process.php" method="post" htmlspecialchars($_SERVER[‘PHP_SELF’]>
+<form action="process.php" method="post" >
 
   <div>
     <label for="uname"><b>Username</b></label>
@@ -38,7 +29,11 @@ $_SESSION['eroare']= $eroare;
 
     <button type="submit">Login</button>
     <label>
-    <span class=”eroare”><?= $eroare; ?></span>
+    <?php
+if (isset($_GET['eroare'])) {
+    echo $_GET['eroare'];
+}
+?>
 
 </form>
 </body>

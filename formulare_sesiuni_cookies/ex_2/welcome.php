@@ -6,13 +6,7 @@
 
 // daca empty username or password ,  send him back cu eroare
 session_start();
-if (isset($_POST['submit'])) {
 
-    if (($_POST['uid'] != "NUMELE_TAU") && ($_POST['psw'] != "programareweb")) {
+//cum as putea sa protejez pagina asta in caz ca cineva intra pe la spatele formularului direct la aceasta pagina? 
 
-        header("Location:login.php=nuaiacces");
-    } else {
-        header("Location:login.php=nuaiacces");
-    }
-
-}
+echo " alzheimer vindecat !! ";
