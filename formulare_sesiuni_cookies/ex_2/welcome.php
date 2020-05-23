@@ -6,7 +6,10 @@
 
 // daca empty username or password ,  send him back cu eroare
 session_start();
-
-//cum as putea sa protejez pagina asta in caz ca cineva intra pe la spatele formularului direct la aceasta pagina? 
-
-echo " alzheimer vindecat !! ";
+//mersi de pontul cu flag =)
+if (isset($_SESSION['isLoggedIn'])) {
+    if (!($_SESSION['isLoggedIn'])) {
+        header("Location:login.php?eroare=backdoor is closed");
+    }
+}
+echo 'alzheimer vindecat!';

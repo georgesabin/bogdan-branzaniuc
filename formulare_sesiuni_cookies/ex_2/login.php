@@ -29,11 +29,10 @@ $_SESSION['password'] = $password;
 
     <button type="submit">Login</button>
     <label>
-    <?php
-if (isset($_GET['eroare'])) {
-    echo $_GET['eroare'];
-}
-?>
+    <?php if (isset($_GET['eroare'])) {
+echo sprintf('<span class="eroare">%s</span>', $_GET['eroare']);
+} ?>
+
 
 </form>
 </body>
