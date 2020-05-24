@@ -7,30 +7,24 @@ session_start();
 $_SESSION['isLoggedIn'] = false;
 //red1
 if (empty($_POST['submit'])) {
-    header("location: login.php?eroare= nu-ai-completat-formularul");
+    header("location: login.php?eroare=nu-ai-completat-formularul");
 }
+$uname = testInput($_POST['uname']) ;
+$upsw = testInput($_POST['psw']) ;
 //red2
-if (($_POST['uname'] != $_SESSION['username']) && ($_POST['psw'] != $_SESSION['password'])) {
-    testInput($_POST['uname']) !== $_SESSION['username'];
-    testInput($_POST['psw']) !== $_SESSION['password'];
-    header("Location:login.php?eroare= alzheimer day 0...");
+if (($uname != $_SESSION['username']) && ($upsw != $_SESSION['password'])) {
+    header("Location:login.php?eroare=alzheimer day 0...");
 }
 //red3
-else if (($_POST['uname'] == $_SESSION['username']) && ($_POST['psw'] != $_SESSION['password'])) {
-    testInput($_POST['uname']) !== $_SESSION['username'];
-    testInput($_POST['psw']) !== $_SESSION['password'];
-    header("Location:login.php?eroare= alzheimer day 1...");
+else if (($uname == $_SESSION['username']) && ($upsw != $_SESSION['password'])) {
+    header("Location:login.php?eroare=alzheimer day 1...");
 }
 //red4
-else if (($_POST['uname'] != $_SESSION['username']) && ($_POST['psw'] == $_SESSION['password'])) {
-    testInput($_POST['uname']) !== $_SESSION['username'];
-    testInput($_POST['psw']) !== $_SESSION['password'];
-    header("Location:login.php?eroare= alzheimer day 2...");
+else if (($uname != $_SESSION['username']) && ($upsw == $_SESSION['password'])) {
+    header("Location:login.php?eroare=alzheimer day 2...");
 }
 //green!!
-else if (($_POST['uname'] == $_SESSION['username']) && ($_POST['psw'] == $_SESSION['password'])) {
-    testInput($_POST['uname']) !== $_SESSION['username'];
-    testInput($_POST['psw']) !== $_SESSION['password'];
+else if (($uname == $_SESSION['username']) && ($upsw == $_SESSION['password'])) {
     header("Location:welcome.php");
     $_SESSION['isLoggedIn'] = true;
 }
