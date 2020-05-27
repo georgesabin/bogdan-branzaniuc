@@ -9,8 +9,8 @@ $_SESSION['isLoggedIn'] = false;
 if (empty($_POST['submit'])) {
     header("location: login.php?eroare=nu-ai-completat-formularul");
 }
-$uname = testInput($_POST['uname']) ;
-$upsw = testInput($_POST['psw']) ;
+$uname = testInput($_POST['uname']);
+$upsw = testInput($_POST['psw']);
 //red2
 if (($uname != $_SESSION['username']) && ($upsw != $_SESSION['password'])) {
     header("Location:login.php?eroare=alzheimer day 0...");
