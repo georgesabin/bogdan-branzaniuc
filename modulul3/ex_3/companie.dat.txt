@@ -1,0 +1,5 @@
+Steven, King, Web Developer, 2400, 50%, 2018-10-25
+Neena, Kochhar, HR, 1500, 30%, 2019-01-12
+Lex, De Haan, Web Developer, 1700, 35%, 2017-10-25
+Alexander, Hunold, Tester, 1500, 10%, 2019-11-10
+Bruce, Ernst, Tester, 2500, 75%, 2017-01-03
