@@ -6,7 +6,7 @@ function customFor(array $y): void
 {
 
     for ($i = count($y); $i > 0; $i--) {
-         $r[] = $y[$i];
+        $r[] = $y[$i];
     }
     var_dump($r);
 
