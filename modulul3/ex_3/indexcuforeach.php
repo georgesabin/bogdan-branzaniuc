@@ -13,6 +13,7 @@ foreach ($angajati as $angajat) {
     foreach ($joburi as $key => $nrAngajati) {
         $tipJob[] = $key;
         $mediiJoburi[] = array_sum($nrAngajati) / count($nrAngajati);
+        $mediaJoburilor = array_combine($tipJob, $mediiJoburi);
     }
 
     #2. Daca data vechime angajat >= 1 an, calculeaza si adauga bonusul la salariu.
@@ -58,4 +59,7 @@ foreach ($angajati as $angajat) {
 </html><?php
 }
 #afisare 1.
-var_dump(array_combine($tipJob, $mediiJoburi));
+$mediaJoburilor = array_combine($tipJob, $mediiJoburi);
+foreach ($mediaJoburilor as $job => $medie) {
+    echo 'pentru' . $job . 'media salariilor este' . $medie . "<br>";
+}?>
