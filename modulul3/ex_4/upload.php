@@ -23,7 +23,7 @@ $fileTmpName = $_FILES["fileName"]["tmp_name"];
 $fileExt = 0;
 $filePath = "/uploads/$fileName";
 
-if (isset($_POST[["fileName"]])) {
+if (isset($_POST[["proprietati"]])) {
     if (file_exists($fileName, $filePath)) {
         function switching()
         {
