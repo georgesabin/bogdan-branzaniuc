@@ -13,15 +13,19 @@ var_dump($argv);
 
 $x = $argv[1];
 $y = $argv[2];
+set_error_handler('erorica');
 
 if (!is_numeric($x) || !is_numeric($y)) {
-    trigger_error('ARDE FUM si IESE FOC', E_USER_WARNING);
-    die("daca numeric= apa si non-numeric= foc, ai dat foc la program...");
+    trigger_error('Arde fum si iese Foc', E_USER_WARNING);
+
 } elseif ($x * $y > 1000) {
     echo $x + $y;
+} elseif ($x * $y <= 1000) {
+    echo $x * $y;
 }
 function erorica(int $errno, string $errstr): void
 {
-    # echo "<b>ARDE FUM si IESE FOC:</b> [$errno] $errstr";
+
+    echo "[$errno] $errstr";
+    die;
 }
-set_error_handler('erorica');
