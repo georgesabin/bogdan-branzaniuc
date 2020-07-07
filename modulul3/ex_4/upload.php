@@ -14,43 +14,43 @@ $fileTmpName = $_FILES["fileName"]["tmp_name"];
 $fileType = $_FILES["fileName"]["type"];
 $fileSize = $_FILES["fileName"]["size"];
 $error = $_FILES["fileName"]["error"];
-$filePath = "/uploads/$fileName";
+$filePath = "uploads/$fileName";
 
 $justName = pathinfo($filePath, PATHINFO_FILENAME);
-$fileTmpName = $_FILES["fileName"]["tmp_name"];
 $fileExt = pathinfo($filePath, PATHINFO_EXTENSION);
 
 function switching(): void#cazurile radio-buttons-urilor
 
 {
+
     $x = $_POST["proprietati"];
     $size = $GLOBALS["fileSize"];
     $path = $GLOBALS["filePath"];
     $type = $GLOBALS["fileType"];
     $name = $GLOBALS["justName"];
     $ext = $GLOBALS["fileExt"];
+
     switch ($x) {
+        default:
+            echo 'nu ai ales nicio optiune';
+            break;
         case 1:
-            redirect($size);
+            echo $size;
             break;
         case 2:
-            redirect($type);
+            echo $type;
             break;
         case 3:
-            redirect($name);
+            echo $name;
             break;
         case 4:
-            redirect($ext);
+            echo $ext;
             break;
         case 5:
             unlink($path); # nu am inteles restul functiei "[, resource $context ] ) : bool"
             break;
+    }
 
-    }}
-function redirect($x): void#aceasta functie se foloseste in f switching
-
-{
-    header("Location:form.php?eroare=", $x); # vreau sa apara mesajul $x in header, need a solution eroare:Cannot modify header information
 }
 
 if (isset($_POST["proprietati"])) {
@@ -60,10 +60,7 @@ if (isset($_POST["proprietati"])) {
 
     } elseif (!file_exists($filePath)) {
         move_uploaded_file($fileTmpName, $filePath);
-        # aici imi da eroare : Warning: move_uploaded_file(/uploads/comanda eric.jpg):
-        #failed to open stream: No such file or directory in C:\wamp64\www\bogdan-branzaniuc\modulul3\ex_4\upload.php on line 57
-        # si Unable to move 'C:\wamp64\tmp\php74E0.tmp' to '/uploads/comanda eric.jpg' in C:\wamp64\www\bogdan-branzaniuc\modulul3\ex_4\upload.php on line 57
-        # file_upload este activat in ini-file
+
         switching();
     }
 

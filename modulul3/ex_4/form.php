@@ -12,7 +12,5 @@
 
     <input type="submit" value="Upload File" name="submit"><br>
     <lable>
-    <?php if (isset($_GET['eroare'])) {
-    echo sprintf('<span class="eroare">%s</span>', $_GET['eroare']);}?>
 
 </html>
