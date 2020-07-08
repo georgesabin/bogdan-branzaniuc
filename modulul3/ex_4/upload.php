@@ -31,9 +31,7 @@ function switching(): void#cazurile radio-buttons-urilor
     $ext = $GLOBALS["fileExt"];
 
     switch ($x) {
-        default:
-            echo 'nu ai ales nicio optiune';
-            break;
+
         case 1:
             echo $size;
             break;
@@ -48,6 +46,9 @@ function switching(): void#cazurile radio-buttons-urilor
             break;
         case 5:
             unlink($path); # nu am inteles restul functiei "[, resource $context ] ) : bool"
+            break;
+        default:
+            echo 'nu ai ales nicio optiune';
             break;
     }
 
