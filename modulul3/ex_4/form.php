@@ -1,8 +1,8 @@
 <html>
 
-<form action="upload.php" method="POST" enctype="multipart/form-data"required>
+<form action="upload.php" method="POST" enctype="multipart/form-data">
     select the file:
-    <input type="file" name="fileName" id="fileIdName"><br>
+    <input type="file" name="fileName" id="fileIdName"required><br>
     <!-- radio- buttons -->
     <input type="radio" id="dimensiuneFisier" name="proprietati" value="1"required>afisare dimensiune fisier<br>
     <input type="radio" id="tipFisier" name="proprietati" value="2"required>afisare tip fisier<br>
