@@ -9,12 +9,9 @@ Clasa va avea:
 class SortareArray
 {
     private $vector = [];
-    public $adaptor = [];
-    public function setArray(array $adaptor): void
+    public function setArray(array $adaptor = []): void
     {
         $this->vector = $adaptor;
-        //var_dump($this->vector);
-
     }
 
     public function sortare(): void
