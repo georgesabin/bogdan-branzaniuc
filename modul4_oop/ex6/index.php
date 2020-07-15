@@ -60,23 +60,28 @@ class Car extends Vehicle
     private $county = ""; #(doar 2 caractere, ex: IS)
     private $number = 0; #(doar 2 cifre, ex: 01)
     private $characters = ""; #(doar 3 caractere, ex: ABC)
-    public function __construct(string $county, int $number, string $characters)
+    public function __construct(string $county, int $number, string $characters, string $col, float $w, float $cons, string $country, string $f, float $t)
     {
-
         $this->county = $county;
         $this->number = $number;
         $this->characters = $characters;
+        parent::__construct($col, $w, $cons, $country, $f, $t);
     }
     public function placaM(): void
     {
         echo $this->county . "" . $this->number . "" . $this->characters;
     }
 }
-$vehicle1 = new Vehicle("red", 1115.52, 15.2, "Romania", "cherosen", 22.22);
-$vehicle1->afisare();
-
-$masinaCluj = new Car("CJ", 41, "IFE");
+//masina1
+$masinaCluj = new Car("CJ", 41, "IFE", "red", 1115.52, 15.2, "Romania", "cherosen", 22.22);
 $masinaCluj->placaM();
+$masinaCluj->afisare();
+
+//masina2
+$masinaIasi = new Car("IS", 41, "IFE", "green", 1115.52, 15.2, "Romania", "cherosen carcinogenic", 22.22);
+$masinaCluj->placaM();
+$masinaCluj->afisare();
+
 //bicicleta
 class Bike extends Vehicle
 {

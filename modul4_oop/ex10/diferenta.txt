@@ -1,0 +1,12 @@
+Care este diferenta dintre o clasa abstracta si o interfata?
+
+"ATENȚIE: Aceasta este diferența dintre clasele abstracte și interfețe.
+Clasele abstracte pot avea metode reale, 
+în timp ce interfețele pot avea doar declarații de metodă."
+
+in cuvintele mele =) : interfata este lista de invitati la petrecere pe care portarul o detine,
+iar clasa abstracta este reteta din cartea de bucate cu reguli detaliate pentru clasa copil.
+
+daca vreau ca 100 de elevi din scoala sa respecte aceleasi reguli, fac o clasa abstracta cu care
+ii instiintez pe toti ce au de facut, ca si cum le pui orarul/notele pe usa scolii, in loc sa le dai cate un orar
+la fiecare personal  <3 <3 <3 <3 . si daca am cativa  elevi care primesc tratament special , fac override numai la ei. 

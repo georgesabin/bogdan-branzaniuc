@@ -31,18 +31,16 @@ class Calculator
     {
         echo $this->a * $this->b;
         echo "</br>";
-    }private function modul(): void
+    }private function modulo(): void
     {
-        echo abs($this->a);
-        echo ";";
-        echo abs($this->b);
-        echo "</br>";
+        echo $this->a % $this->b;
+
     }
     public function operare($z): void
     {
         switch ($z) {
             case 1:
-                $this->modul();
+                $this->modulo();
                 break;
             case 2:
                 $this->scadere();
@@ -54,7 +52,7 @@ class Calculator
                 $this->inmultire();
                 break;
             default:
-                $this->modul();
+                $this->modulo();
                 $this->scadere();
                 $this->inmultire();
                 $this->adunare();
