@@ -26,48 +26,47 @@ interface CylinderInterface
 }
 trait Helper
 {
-    public function round($parametru)
+    public static function round($parametru)
     {
-        $this->x = $parametru;
-        echo round($this->x);
+        round($parametru);
     }
 }
 class Cylinder implements CylinderInterface
 {
     use Helper;
     const PI = 3.14;
-    private $r = 0;
-    private $h = 0;
-    private $v = 0;
-    private $a = 0;
+    private $radius = 0;
+    private $height = 0;
+    private $volum = 0;
+    private $arie = 0;
     //constructor
-    public function __construct($radius, $height)
+    public function __construct($r, $h)
     {
-        $this->r = $radius;
-        $this->h = $height;
+        $this->radius = $r;
+        $this->height = $h;
     }
     //metoda arie
     public function area()
     {
-        $this->a = 2 * self::PI * $this->r * ($this->r + $this->h); //A = 2 * PI * r * (r + h)
-        if (is_double($this->a)) {
-            return round($this->a);
+        $this->arie = 2 * self::PI * $this->radius * ($this->radius + $this->height); //A = 2 * PI * r * (r + h)
+        if (is_double($this->arie)) {
+            return Helper::round($this->arie);
         } else {
-            return $this->a;
+            return $this->arie;
         }
     } // metoda volum
     public function volume()
     {
-        $this->v = self::PI * $this->r ^ 2 * $this->h; //V = PI * r ^ 2 * h
-        if (is_double($this->v)) {
-            return round($this->v);
+        $this->volum = self::PI * $this->radius ** 2 * $this->height; //V = PI * r ^ 2 * h
+        if (is_double($this->volum)) {
+            return Helper::round($this->volum);
         } else {
-            return $this->v;
+            return $this->volum;
         }
     }
     public function afisare(): void
     {
-        echo "The cylinder with radius " . $this->r . " and height " . $this->h . " has area " . $this->area() . " and volume " . $this->volume();
+        echo "The cylinder with radius " . $this->radius . " and height " . $this->height . " has area " . $this->area() . " and volume " . $this->volume();
     }
 }
 $cilindru = new Cylinder(10.12341, 20);

@@ -11,7 +11,7 @@ interface Animal
 class Dog implements Animal
 {
     public $specie = "";
-    public function __construct($specieAnimal)
+    public function __construct(string $specieAnimal)
     {
         $this->specie = $specieAnimal;
     }

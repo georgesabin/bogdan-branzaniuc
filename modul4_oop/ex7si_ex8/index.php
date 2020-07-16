@@ -4,7 +4,7 @@
 final class MyClass
 {
     private $x = "";
-    final public function __construct($testament)
+    public function __construct($testament)
     {
         $this->x = $testament;
     }
@@ -16,3 +16,7 @@ final class MyClass
 $secret = new MyClass("nu va dau nimic");
 $secret->pentruNepoti();
 //am scris totul dintr-un shot si am verificat doar la final :)) a little and significant improovment
+/*class Test extends MyClass
+{
+
+}*/
