@@ -15,8 +15,10 @@ $event['descriere'] = verificareDate($_POST['eventDescription']);
 $event['participanti'] = $_POST['persoana'];
 
 $calendar['events'][] = $event;
-$calendar['events'][] = $event; //aici testam dubland arrayul sa vad daca merge foreachul din helper.phph =)
-var_dump($calendar['events']);
+$calendar['events'][] = $event;
+$calendar['events'][] = $event; //aici testam dubland/tripland arrayul simuland baza de date
+
+//var_dump($calendar['events']);
 
 //Un eveniment nu poate exista de mai multe ori în sesiune:
 $numeEv = $event['nume'];

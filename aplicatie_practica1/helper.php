@@ -1,4 +1,5 @@
 <?php
+
 //helper pentru transformarea datelor trimise la server
 function testImput($data)
 {
@@ -16,40 +17,47 @@ function verificareDate($x)
     }
 }
 //helper pentru verificarea existentei evenimentului curent in sesiune
-function singleEv(array $arrayulCalendar, array $evenimentulCurent)
+function singleEv(array $arrayulCalendar, array $evenimentulCurent): bool
 {
-    if (!in_array($arrayulCalendar, $evenimentulCurent)) {
-        $arrayulCalendar[] = $evenimentulCurent;
-    } else {
-        return in_array($arrayulCalendar, $evenimentulCurent);
-    }
+    return in_array($arrayulCalendar, $evenimentulCurent);
 }
 //o persoana poate participa de maxim 2 ori la evenimente in aceeasi zi
 //foreach de la fiecare sa ia dataS si sa faca array cu cheia dataS si participantii
 
-#toate variabilele sunt nume alias pentru parametrii array-ului $calendar din salveaza.php
-function grupareDate(array $calendarul, $data, $persoane): void
+#numele parametrilor de mai jos sunt nume alias pentru parametrii array-ului $calendar din salveaza.php
+#ca sa nu primesc eroare
+function grupareDate(array $evenimente, $data, $persoane): void
 {
     $grupareDate = [];
     $dataCurenta = '';
 
-    foreach ($calendarul as $key) {
-        #adaptarea parametrilor importati la functie
-        $key['data'] = $data;
-        $key['persoane'] = $persoane;
-        #conectarea
-        $dataCurenta = $key['data'];
-        $grupareDate[$dataCurenta][] = $key['persoane'];
+    foreach ($evenimente as $eveniment) {
+
+        $grupareDate[$data][] = $persoane;
     }
-    //var_dump($grupareDate[$dataCurenta]);
+    //var_dump($grupareDate[$data]);
+    $totalPrezente = [];
+    $dataCurenta = date("Y-m-d");
+
+    if ($data === $dataCurenta) {
+        $totalPrezente = array_merge(...$grupareDate[$data]);
+        //var_dump($totalPrezente);
+
+    }
+    $prezentzePersoana = (array_count_values($totalPrezente));
+    //var_dump($prezentzePersoana);
+
+    $refuzati = [];
+    foreach ($persoane as $key => $persoana) {
+        if ($prezentzePersoana[$persoana] > 2) {
+
+            unset($persoane[$key]);
+            array_values($persoane);
+            $refuzati[] = $persoana;
+        }
+    }
+    echo "persoana/persoanele : (" . implode(" , ", $refuzati) . ") deja participa la doua evenimente in
+            aceasta data " . "</br>";
     //var_dump($persoane);
 
-    foreach ($grupareDate[$dataCurenta] as $pozitie => $persoana) {
-        //var_dump($persoane);
-        if ($data === $dataCurenta) {
-            $persoane = array_merge( /* blocaj */$persoane);
-        }
-
-    }
-    var_dump($persoane);
 }
