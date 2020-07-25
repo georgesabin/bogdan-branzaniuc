@@ -18,11 +18,14 @@ $calendar['events'][] = $event;
 $calendar['events'][] = $event;
 $calendar['events'][] = $event; //aici testam dubland/tripland arrayul simuland baza de date
 
-//var_dump($calendar['events']);
-
 //Un eveniment nu poate exista de mai multe ori în sesiune:
-$numeEv = $event['nume'];
+
 singleEv($calendar, $event);
-//o persoana poate participa de maxim 2 ori la evenimente in aceeasi zi
-//foreach de la fiecare sa ia dataS si sa faca array cu cheia dataS si participantii
-grupareDate($calendar['events'], $event['dataS'], $event['participanti']);
+/*o persoana poate participa de maxim 2 ori la evenimente in aceeasi zi
+Verifică dacă evenimentul există în sesiune apelând funcția de la bulina 2. Dacă false,
+atunci apelezi pentru ștergerea participantului/participanților.*/
+
+if (singleEv($calendar, $event) == false) {
+    grupareDate($calendar['events'], $event['dataS'], $event['participanti']);
+    $_SESSION['events'] = $event;
+}

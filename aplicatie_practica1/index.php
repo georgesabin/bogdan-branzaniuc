@@ -6,7 +6,21 @@
 - checkbox-uri → 3-4 nume de persoană care vor participa la
 eveniment (vor fi trimise la server sub formă de array)
 - button de submit formular
- */?>
+ */
+session_start();
+$a = 0;
+setcookie("vizite", $a, time() - 3000);
+
+if (isset($_COOKIE['vizite'])) {
+    $a += 1;
+}
+if ($a <= 1) {
+    echo "Bine ai venit! Nu ne-ai mai vizitat pana acum. ";
+} elseif ($a > 1) {
+    echo "Ne-ai mai vizitat de" . $a . "ori!";
+}
+
+?>
 
 <html>
 <form method="POST" action="salveaza.php" >

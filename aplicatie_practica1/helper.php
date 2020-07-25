@@ -39,25 +39,36 @@ function grupareDate(array $evenimente, $data, $persoane): void
     $totalPrezente = [];
     $dataCurenta = date("Y-m-d");
 
-    if ($data === $dataCurenta) {
+    if ($data === $dataCurenta) { //?
         $totalPrezente = array_merge(...$grupareDate[$data]);
+        $prezentzePersoana = (array_count_values($totalPrezente));
+        //var_dump($prezentzePersoana);
+
+        $refuzati = [];
+        foreach ($persoane as $key => $persoana) {
+            if ($prezentzePersoana[$persoana] > 2) {
+                unset($persoane[$key]);
+                $refuzati[] = $persoana;
+            }
+        }
+
         //var_dump($totalPrezente);
 
     }
-    $prezentzePersoana = (array_count_values($totalPrezente));
-    //var_dump($prezentzePersoana);
 
-    $refuzati = [];
-    foreach ($persoane as $key => $persoana) {
-        if ($prezentzePersoana[$persoana] > 2) {
-
-            unset($persoane[$key]);
-            array_values($persoane);
-            $refuzati[] = $persoana;
-        }
-    }
     echo "persoana/persoanele : (" . implode(" , ", $refuzati) . ") deja participa la doua evenimente in
             aceasta data " . "</br>";
-    //var_dump($persoane);
+    var_dump($persoane);
 
+}
+//afisare baza de date in afisare.php
+function afisareBdate($eveniment)
+{
+    echo "eveniment - " . $eveniment['nume'] . "</br>";
+    echo "data start - " . $eveniment['dataS'] . "</br>";
+    echo "data sfarsit - " . $eveniment['dataF'] . "</br>";
+    echo "descriere - " . $eveniment['descriere'] . "</br>";
+    echo "participanti- ";foreach ($eveniment['participanti'] as $nume) {
+        echo $nume . ", ";
+    }
 }
