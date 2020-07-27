@@ -8,16 +8,18 @@ eveniment (vor fi trimise la server sub formă de array)
 - button de submit formular
  */
 session_start();
-$a = 0;
-setcookie("vizite", $a, time() - 3000);
 
-if (isset($_COOKIE['vizite'])) {
-    $a += 1;
-}
-if ($a <= 1) {
-    echo "Bine ai venit! Nu ne-ai mai vizitat pana acum. ";
-} elseif ($a > 1) {
-    echo "Ne-ai mai vizitat de" . $a . "ori!";
+setcookie("vizite", 0, time() - 3000);
+
+$count = isset($_COOKIE["vizite"]) ? ++$_COOKIE["vizite"] : 0;
+
+if (isset($_COOKIE["vizite"])) {
+    if ($_COOKIE["vizite"] <= 1) {
+        echo "Bine ai venit! Nu ne-ai mai vizitat pana acum. ";
+
+    } else {
+        echo "Ne-ai mai vizitat de" . $count . "ori!";
+    }
 }
 
 ?>
@@ -29,7 +31,7 @@ if ($a <= 1) {
   <input type="text" id="evNameId" name="evName" required> <br>
 
   <label for="evStartId">Event start date:</label><br>
-  <input type="date" id="evStartId" name="evStartDate" required><br>
+  <input type="date" id="evStartId" name="evStartDate" value="<?php echo date("Y-m-d"); ?>" required><br>
 
   <label for="evFinishId">Event finish date:</label><br>
   <input type="date" id="evFinishId" name="evFinishDate" required><br><br>
