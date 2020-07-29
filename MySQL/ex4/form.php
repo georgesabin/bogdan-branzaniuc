@@ -2,29 +2,30 @@
 class Form{
 private $method='';
 private $action ='';
-public function __construct($methodType, $action){
-    $this->method=$methodType;
+
+public function __construct(string $method, string $action){
+    $this->method=$method;
     $this->action=$action;
 }
-public function build():void{
- echo<<<HTML
-  <html>
 
-  <form method =  '<?php $method?>'  action= <?php echo $action ?>>
- <!-- fields -->
- <label for="nameID">Nume:</label><br>
- <input type="text" id="nameID" name="numePers" required> <br>
-
- </html>
-
-HTML;
-
-}
 public function preventXSS($x){
     if (!empty($x)) {
         $x = testImput($x);
         return $x;
 }
 }
+
+public function build():string {
+
+$form='';
+$form .= sprintf('<form action="%s" method="%s">', $this->action, $this->method);
+$form .='<input type="text" name="db"/>';
+$form .='<input type="submit">';
+$form .='</form>';
+return $form ;
 }
-// numim metoda si action page-ul in instantiere
+}
+
+$form = new Form('POST','database.php',);
+
+echo $form->build();

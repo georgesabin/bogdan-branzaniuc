@@ -7,6 +7,7 @@
 eveniment (vor fi trimise la server sub formă de array)
 - button de submit formular
  */
+
 session_start();
 
 setcookie("vizite", 0, time() - 3000);

@@ -19,23 +19,39 @@ function verificareDate($x)
 //helper pentru verificarea existentei evenimentului curent in sesiune
 function singleEv(array $sesiune, array $event): bool
 {
-    return in_array($sesiune, $event);
+    return in_array($event, $sesiune);
 }
+
 //o persoana poate participa de maxim 2 ori la evenimente in aceeasi zi
 
-var_dump($_SESSION['events']);
+//grupareDate($_SESSION['events'], $event['participanti'])
 function grupareDate(array $evenimente, $persoane): void
 {
-    var_dump($evenimente['dataS']);
-    foreach ($evenimente as $eveniment) {
-        $grupareDate[$eveniment['dataS']][] = $eveniment['participanti'];
-        // primesc erori , ca sa nu pierd mai mult timp , rezolvam la urmatorul code review
+    $grupareDupaData = [];
+    foreach ($evenimente as $event) {
+        $dataEv = $event['dataS'];
 
-        foreach ($_SESSION['persoane'] as $eveniment['dataS'] => $persoana) {
-            $totalPersoane = array_merge(...$persoane);
+        $event[$dataEv] = $event;
+        $grupareDupaData[$dataEv][] = $event['participanti'];
+
+    }
+    var_dump($grupareDupaData);
+
+    /*////testat merge-ul arrayului $totalPrezente = array_merge(...$grupareDupaData[$dataEv]);
+    var_dump($totalPrezente);//////*/
+
+    $dataCurenta = date("Y-m-d"); //intrebare
+
+    foreach ($grupareDupaData as $data => $persoane) {
+        var_dump($persoane);
+        if ($data === $dataCurenta) {
+            $totalPersData = array_merge(...$grupareDupaData);
+
         }
     }
+
 }
+
 //afisare baza de date in afisare.php
 function afisareBdate($eveniment)
 {
