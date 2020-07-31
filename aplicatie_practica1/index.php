@@ -32,7 +32,7 @@ if (isset($_COOKIE["vizite"])) {
   <input type="text" id="evNameId" name="evName" required> <br>
 
   <label for="evStartId">Event start date:</label><br>
-  <input type="date" id="evStartId" name="evStartDate" value="<?php echo date("Y-m-d"); ?>" required><br>
+  <input type="date" id="evStartId" name="evStartDate" required><br>
 
   <label for="evFinishId">Event finish date:</label><br>
   <input type="date" id="evFinishId" name="evFinishDate" required><br><br>

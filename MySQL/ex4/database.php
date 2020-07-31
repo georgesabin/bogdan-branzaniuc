@@ -1,12 +1,12 @@
 <?php
 class Database
 {
-    private $serverName = 'localhost';
-    private $userName = 'root';
-    private $password = '';
-    private $databaseName = '';
+    private $serverName;
+    private $userName;
+    private $password;
+    private $databaseName;
 
-    public function __construct($sName, $uName, $psw, $dbName)
+    public function __construct($sName = 'localhost', $uName = 'root', $psw = '', $dbName)
     {
         $this->serverName = $sName;
         $this->userName = $uName;
@@ -17,7 +17,7 @@ class Database
     $connection = new PDO("mysql:host={$this->serverName}", $this->userName, $this->password);
     $connection->exec("CREATE DATABASE `{$this->databaseName}`");
     // logic here */
-    public function connectAndCreateDatabase()
+    public function connectAndCreateDatabase(): void
     {
         $servername = 'localhost';
         $username = 'root';
@@ -33,3 +33,6 @@ class Database
 
     }
 }
+
+$bazaDate = new Database($_POST["db"]);
+$bazaDate->connectAndCreateDatabase();

@@ -23,9 +23,10 @@ $form .='<input type="text" name="db"/>';
 $form .='<input type="submit">';
 $form .='</form>';
 return $form ;
+
 }
 }
 
 $form = new Form('POST','database.php',);
 
-echo $form->build();
+echo $form->build("database.php","POST");

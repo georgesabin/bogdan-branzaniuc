@@ -25,41 +25,50 @@ function singleEv(array $sesiune, array $event): bool
 //o persoana poate participa de maxim 2 ori la evenimente in aceeasi zi
 
 //grupareDate($_SESSION['events'], $event['participanti'])
-function grupareDate(array $evenimente, $persoane): void
-{
-    $grupareDupaData = [];
-    foreach ($evenimente as $event) {
-        $dataEv = $event['dataS'];
-
-        $event[$dataEv] = $event;
-        $grupareDupaData[$dataEv][] = $event['participanti'];
-
+function grupareDate(array $evenimente, array $event): array
+{ //caz red - 0 fara evenimente
+    //daca session empty Session 'events' ,  afisezi return events.
+    if (empty($evenimente)) {
+        return $event;
     }
-    var_dump($grupareDupaData);
+    $grupareDupaData = [];
+    foreach ($evenimente as $ev) {
 
-    /*////testat merge-ul arrayului $totalPrezente = array_merge(...$grupareDupaData[$dataEv]);
-    var_dump($totalPrezente);//////*/
-
-    $dataCurenta = date("Y-m-d"); //intrebare
+        $grupareDupaData[$ev['dataS']][] = $ev['participanti'];
+    }
 
     foreach ($grupareDupaData as $data => $persoane) {
-        var_dump($persoane);
-        if ($data === $dataCurenta) {
-            $totalPersData = array_merge(...$grupareDupaData);
+
+        if ($data === $event['dataS']) {
+            $totalPersData = array_merge(...$persoane);
+            $nrAparitii = array_count_values($totalPersData);
+            $persoaneRamase = [];
+            foreach ($event['participanti'] as $participant) {
+
+                if ($nrAparitii[$participant] > 1) {
+                    $persoaneRamase = array_diff($event['participanti'], [$participant]);
+                    $event['participanti'] = $persoaneRamase;
+                }
+            }
+            //var_dump($event);
 
         }
     }
 
+    return $event;
 }
 
 //afisare baza de date in afisare.php
-function afisareBdate($eveniment)
+function afisareBdate(array $sesiunea): void
 {
-    echo "eveniment - " . $eveniment['nume'] . "</br>";
-    echo "data start - " . $eveniment['dataS'] . "</br>";
-    echo "data sfarsit - " . $eveniment['dataF'] . "</br>";
-    echo "descriere - " . $eveniment['descriere'] . "</br>";
-    echo "participanti- ";foreach ($eveniment['participanti'] as $nume) {
-        echo $nume . ", ";
+    foreach ($sesiunea as $eveniment) {
+        echo "eveniment - " . $eveniment['nume'] . "</br>";
+        echo "data start - " . $eveniment['dataS'] . "</br>";
+        echo "data sfarsit - " . $eveniment['dataF'] . "</br>";
+        echo "descriere - " . $eveniment['descriere'] . "</br>";
+        echo "participanti- ";foreach ($eveniment['participanti'] as $nume) {
+            echo $nume . ", ";
+        }
+        echo "</br>" . "</br>" . "</br>" . "</br>";
     }
 }
