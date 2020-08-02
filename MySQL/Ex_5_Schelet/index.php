@@ -13,4 +13,11 @@ use Classes\NumberOfColumnsForm;
  * Formularul nou va avea action-ul fisierul db.php, loc in care se face crearea tabelei
  */
 $nrColumns = new NumberOfColumnsForm("index.php", "POST");
+
 echo $nrColumns->buildForm();
+
+if (isset($_POST['nrColumns'])) {
+    $numberOfColumns = $_POST['nrColumns'];
+    $columnsForm = new ColumnsForm("db.php", "POST", $numberOfColumns);
+    echo $columnsForm->buildForm();
+}

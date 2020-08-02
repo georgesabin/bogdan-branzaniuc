@@ -11,3 +11,6 @@ if (isset($_POST['db'])) {
     $dbObject->connectAndCreateDatabase();
     header("Location: index.php?mesaj=Baza de date a fost creata cu succes");
 }
+if (isset($_GET['mesaj'])) {
+    echo sprintf('<span class="mesaj">%s</span>', $_GET['mesaj']);
+}

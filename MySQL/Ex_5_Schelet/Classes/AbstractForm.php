@@ -28,7 +28,7 @@ abstract class AbstractForm
 
     protected function textType(string $name): string
     {
-        return sprintf('<input type="text" name="%s">', $name);
+        return sprintf('<input type="text" name="%s" required>', $name);
     }
 
     protected function selectType(string $name, array $options): string
@@ -39,7 +39,7 @@ abstract class AbstractForm
             if (!$value) {
                 continue;
             }
-            
+
             $select .= sprintf('<option value="%s">%s</option>', $value, $label);
         }
 

@@ -34,6 +34,5 @@ class Form
         $form .= '<input type="submit" value="submit">';
         $form .= '</form>';
         return $form;
-
     }
 }
