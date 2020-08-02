@@ -18,12 +18,12 @@ $event['participanti'] = $_POST['persoana'];
 var_dump(singleEv($_SESSION['events'], $event));
 
 //adaugarea evenimentului in sesiune
-if (singleEv($_SESSION['events'], $event) === false) {
-    $_SESSION['events'][] = $event;
-    var_dump($_SESSION['events']);
+if (singleEv($_SESSION['events'], $event) === true) {
+    header("Location: index.php");
 } else {
-    $event = grupareDate($_SESSION['events'], $event); // returneaza event de aici
-    var_dump($event); //de aici vine stocat intr-o baza de date
+    $event = grupareDate($_SESSION['events'], $event);
+    $_SESSION['events'][] = $event;
+    header("Location: afisare.php"); // if true, flag- eroare "acest eveniment exista deja"
 }
 
 ////////////////////////////PE VIITOR////////////////////////////////

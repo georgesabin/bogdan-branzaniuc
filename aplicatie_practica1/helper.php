@@ -45,11 +45,12 @@ function grupareDate(array $evenimente, array $event): array
             $persoaneRamase = [];
             foreach ($event['participanti'] as $participant) {
 
-                if ($nrAparitii[$participant] > 1) {
+                if ($nrAparitii[$participant] >= 2) {
                     $persoaneRamase = array_diff($event['participanti'], [$participant]);
-                    $event['participanti'] = $persoaneRamase;
+
                 }
             }
+            $event['participanti'] = $persoaneRamase;
             //var_dump($event);
 
         }
@@ -59,9 +60,9 @@ function grupareDate(array $evenimente, array $event): array
 }
 
 //afisare baza de date in afisare.php
-function afisareBdate(array $sesiunea): void
+function afisareBdate(array $evenimente): void
 {
-    foreach ($sesiunea as $eveniment) {
+    foreach ($evenimente as $eveniment) {
         echo "eveniment - " . $eveniment['nume'] . "</br>";
         echo "data start - " . $eveniment['dataS'] . "</br>";
         echo "data sfarsit - " . $eveniment['dataF'] . "</br>";

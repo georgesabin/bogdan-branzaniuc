@@ -6,7 +6,7 @@ class Database
     private $password;
     private $databaseName;
 
-    public function __construct($sName = 'localhost', $uName = 'root', $psw = '', $dbName)
+    public function __construct($dbName, $sName = 'localhost', $uName = 'root', $psw = '')
     {
         $this->serverName = $sName;
         $this->userName = $uName;
@@ -33,6 +33,3 @@ class Database
 
     }
 }
-
-$bazaDate = new Database($_POST["db"]);
-$bazaDate->connectAndCreateDatabase();

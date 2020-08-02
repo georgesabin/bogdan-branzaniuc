@@ -19,14 +19,20 @@ public function build():string {
 
 $form='';
 $form .= sprintf('<form action="%s" method="%s">', $this->action, $this->method);
-$form .='<input type="text" name="db"/>';
-$form .='<input type="submit">';
+$form .='<input type="text" name="db" requierd>';
+$form .='<input type="submit" value="submit">';
 $form .='</form>';
 return $form ;
 
 }
 }
 
-$form = new Form('POST','database.php',);
+$formObject = new Form('POST','index.php');
+echo $formObject->build();
+if (isset($_POST['db'])){
 
-echo $form->build("database.php","POST");
+    $dbName=$formObject->preventXSS($_POST['db']);
+    $dbObject=new Database($dbName);
+    $dbObject->connectAndCreateDatabase();
+    header("Location: index.php?mesaj=Baza de date a fost creata cu succes");
+}
