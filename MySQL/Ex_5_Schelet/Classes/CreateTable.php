@@ -2,6 +2,8 @@
 
 namespace Classes;
 
+// $db = new CreateTable('nume', [], [], []);
+
 class CreateTable
 {
     private $server;
@@ -10,18 +12,18 @@ class CreateTable
     private $dbName;
     private $tableName;
     private $columnsName;
-    private $columnsType;
+    private $columnsType; // poti trimite parametrii string ca array ?
     private $columnsSize;
 
     public function __construct(
-        string $server = 'localhost',
-        string $user = 'root',
-        string $password = '',
         string $dbName,
         string $tableName,
         array $columnsName,
         array $columnsType,
-        array $columnsSize
+        array $columnsSize,
+        string $server = 'localhost',
+        string $user = 'root',
+        string $password = ''
     ) {
         $this->server = $server;
         $this->user = $user;
@@ -42,8 +44,17 @@ class CreateTable
          * Atentie la ultima iteratie pentru ca dupa ultima coloana nu trebuie sa apara ,
          * Acest query va fi stocat intr-o variabila si se apeleaza metoda de mai jos (connect)
          */
-    }
+        foreach ($this->columnsName as $key => $clName) {
 
+            $query .= sprintf('%s %s(%d), ', $clName, $this->columnsType['key'], $this->columnsSize['key']);
+
+            if ($query[strlen($query) - 1] = ",") {
+                $query = chop($query, $query[strlen($query) - 1]);
+            }
+
+            $this->connect($query);
+        }
+    }
     private function connect(string $query): void
     {
         $connection = new PDO("mysql:host={$this->server};dbname={$this->dbName}", $this->user, $this->password);
@@ -56,8 +67,8 @@ class CreateTable
          *  $query (AICI VOR FI COLOANELE)
          * );
          */
-        $createTable = '';
-
+        $createTable = 'CREATE TABLE $this->tableName(ID INT(11) AUTO_INCREMENT PRIMARY KEY, $query)';
         $connection->exec($createTable);
     }
+
 }

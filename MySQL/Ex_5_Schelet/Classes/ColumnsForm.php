@@ -35,22 +35,16 @@ class ColumnsForm extends AbstractForm
          */
         $form .= "numele bazei de date: " . $this->textType("numeBazaDate") . "<br>";
         $form .= "numele tabelului: " . $this->textType("numeTabel") . "<br>";
-
-        for ($i = 0; $i < $_POST['nrColumns']; $i++) {
-            $form .= $this->textType("name");
+        $form .= "</br></br>";
+        for ($i = 0; $i < $this->numberOfColumns; $i++) {
+            $form .= $this->textType('columnName[]');
+            $form .= $this->textType('columnSize[]');
+            $form .= $this->selectType('columnType[]', ["INT", "BOOL", "STRING", "ARRAY", "VARCHAR", "CHAR"]);
+            $form .= "</br></br>";
         }
-        $form .= "</br>";
-        for ($i = 0; $i < $_POST['nrColumns']; $i++) {
-            $form .= $this->selectType("name", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-        }
-        $form .= "</br>";
-        for ($i = 0; $i < $_POST['nrColumns']; $i++) {
-            $form .= $this->textType("columnSize[]");
-        }
-        $form .= "</br>";
 
         $form .= $this->submitType("submit", "submit");
-
+        $form .= $this->endForm();
         return $form;
     }
 }
