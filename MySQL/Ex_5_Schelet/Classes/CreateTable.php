@@ -2,8 +2,6 @@
 
 namespace Classes;
 
-// $db = new CreateTable('nume', [], [], []);
-
 class CreateTable
 {
     private $server;
@@ -11,9 +9,9 @@ class CreateTable
     private $password;
     private $dbName;
     private $tableName;
-    private $columnsName;
-    private $columnsType; // poti trimite parametrii string ca array ?
-    private $columnsSize;
+    private $columnsName = [];
+    private $columnsType = [];
+    private $columnsSize = [];
 
     public function __construct(
         string $dbName,
@@ -52,8 +50,8 @@ class CreateTable
                 $query = chop($query, $query[strlen($query) - 1]);
             }
 
-            $this->connect($query);
         }
+        $this->connect($query);
     }
     private function connect(string $query): void
     {
@@ -67,7 +65,7 @@ class CreateTable
          *  $query (AICI VOR FI COLOANELE)
          * );
          */
-        $createTable = 'CREATE TABLE $this->tableName(ID INT(11) AUTO_INCREMENT PRIMARY KEY, $query)';
+        $createTable = "CREATE TABLE $this->tableName(ID INT(11) AUTO_INCREMENT PRIMARY KEY, $query)";
         $connection->exec($createTable);
     }
 
