@@ -39,7 +39,7 @@ class ColumnsForm extends AbstractForm
         for ($i = 0; $i < $this->numberOfColumns; $i++) {
             $form .= $this->textType('columnName[]');
             $form .= $this->textType('columnSize[]');
-            $form .= $this->selectType('columnType[]', ["INT", "BOOL", "VARCHAR", "CHAR"]);
+            $form .= $this->selectType('columnType[]', ['INT' => 'int', 'BOOL' => 'Boolean', 'VARCHAR' => 'Varchar', 'CHAR' => 'Char']);
             $form .= "</br></br>";
         }
 

@@ -1,6 +1,7 @@
 <?php
-
 namespace Classes;
+
+use \PDO;
 
 class CreateTable
 {
@@ -42,9 +43,10 @@ class CreateTable
          * Atentie la ultima iteratie pentru ca dupa ultima coloana nu trebuie sa apara ,
          * Acest query va fi stocat intr-o variabila si se apeleaza metoda de mai jos (connect)
          */
+        $query = '';
         foreach ($this->columnsName as $key => $clName) {
 
-            $query .= sprintf('%s %s(%d), ', $clName, $this->columnsType['key'], $this->columnsSize['key']);
+            $query .= sprintf('%s %s(%d), ', $clName, $this->columnsType[$key], $this->columnsSize[$key]);
 
             if ($query[strlen($query) - 1] = ",") {
                 $query = chop($query, $query[strlen($query) - 1]);

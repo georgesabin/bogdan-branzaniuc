@@ -20,13 +20,24 @@ function preventXSS($x)
         return $x;
     }
 }
+function preventXSSArray(array $arr): array
+{if (!empty($arr)) {
+    $preventArray = [];
+    foreach ($arr as $value) {
+        $preventArray[] = preventXSS($value);
+    }
+    return $preventArray;
+} else {
+    return 0;
+}
+}
 var_dump($_POST);
 
-$dbName .= preventXSS($_POST['numeBazaDate']);
-$tableName .= preventXSS($_POST['numeTabel']);
-$colName[] = preventXSS($_POST['columnName']);
-$colType[] = preventXSS($_POST['columnType']);
-$colSize[] = preventXSS($_POST['columnSize']);
+$dbName = preventXSS($_POST['numeBazaDate']);
+$tableName = preventXSS($_POST['numeTabel']);
+$colName = preventXSSArray($_POST['columnName']);
+$colType = preventXSSArray($_POST['columnType']);
+$colSize = preventXSSArray($_POST['columnSize']);
 
 $db = new CreateTable($dbName, $tableName, $colName, $colType, $colSize);
 $db->createTable();
