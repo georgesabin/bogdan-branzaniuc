@@ -48,10 +48,9 @@ class CreateTable
 
             $query .= sprintf('%s %s(%d), ', $clName, $this->columnsType[$key], $this->columnsSize[$key]);
 
-            if ($query[strlen($query) - 1] = ",") {
-                $query = chop($query, $query[strlen($query) - 1]);
-            }
-
+        }
+        if ($query[strlen($query) - 1] = ",") {
+            $query = chop($query, $query[strlen($query) - 1]);
         }
         $this->connect($query);
     }

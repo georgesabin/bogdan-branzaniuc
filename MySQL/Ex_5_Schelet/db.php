@@ -27,9 +27,8 @@ function preventXSSArray(array $arr): array
         $preventArray[] = preventXSS($value);
     }
     return $preventArray;
-} else {
-    return 0;
 }
+    return [];
 }
 var_dump($_POST);
 
