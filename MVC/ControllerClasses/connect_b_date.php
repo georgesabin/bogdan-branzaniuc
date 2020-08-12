@@ -1,16 +1,11 @@
 <?php
-namespace Model;
+namespace Controller;
 
 use PDO;
 
-abstract class ConnectBdate
+class ConnectBdate
 {
-    abstract protected function connectDb();
-}
-
-class Product extends ConnectBdate
-{
-    public function connectDb()
+    protected static function connectDb()
     {
         {
             $servername = 'localhost';
@@ -21,7 +16,7 @@ class Product extends ConnectBdate
                 $conn = new PDO("mysql:host=$servername;dbname=Stoc", $username, $password);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 echo 'Conectat cu succes!';
-
+                return $conn;
             } catch (PDOException $e) {
                 echo 'Conectare esuata: ' . $e->getMessage();
             }
