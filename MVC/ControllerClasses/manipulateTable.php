@@ -1,7 +1,7 @@
 <?php
 namespace Controller;
-
-class ManipulateStoc
+//aceasta clasa schimba datele din baza de date la cerinta formularului completat de client
+class ManipulateProduct
 {
     private $productObject;
     public function __construct($productObject)
@@ -11,18 +11,18 @@ class ManipulateStoc
     // inmulteste pretul produselor din baza de date cu raportul valutar trimis de client prin codul valutar selectat in formular
     public function currencyCases(): void
     {
-        $post = 0;
-        if ($post == "USD" && $valutaBdate = "EUR") {
+
+        if ($_POST['Currency'] == "USD" && $valutaBdate = "EUR") {
             //change in baza de date.
-        } elseif ($post == "EUR" && $valutaBdate = "USD") {
+        } elseif ($_POST['Currency'] == "EUR" && $valutaBdate = "USD") {
             //change in baza de date.
-        } elseif ($post == "USD" && $valutaBdate = "ZAR") {
+        } elseif ($_POST['Currency'] == "USD" && $valutaBdate = "ZAR") {
             //change in baza de date.
-        } elseif ($post == "ZAR" && $valutaBdate = "USD") {
+        } elseif ($_POST['Currency'] == "ZAR" && $valutaBdate = "USD") {
             //change in baza de date.
-        } elseif ($post == "ZAR" && $valutaBdate = "EUR") {
+        } elseif ($$_POST['Currency'] == "ZAR" && $valutaBdate = "EUR") {
             //change in baza de date.
-        } elseif ($post == "EUR" && $valutaBdate = "ZAR") {
+        } elseif ($_POST['Currency'] == "EUR" && $valutaBdate = "ZAR") {
             //change in baza de date.
         }
 
