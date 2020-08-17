@@ -13,7 +13,7 @@ abstract class AbstractForm
         $this->method = $method;
     }
 
-    abstract public function buildForm(): string;
+    abstract public function buildForm();
 
     protected function startForm(string $action, string $method = 'GET'): string
     {
@@ -25,7 +25,7 @@ abstract class AbstractForm
         return '</form>';
     }
 
-    protected function intType(string $name): int
+    protected function intType(string $name): string
     {
         return sprintf('<input type="text" name="%s" required>', $name);
     }
