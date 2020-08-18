@@ -1,26 +1,50 @@
 <?php
-
-use Controller\ClientForm;
-use Model\Product;
+include_once 'abstract_form.php';
 include_once '../Model/model.php';
 include_once '../Controller/controller.php';
-//Show product tabele
-$table = new Product();
-$table->showTable();
+use Controller\AbstractForm;
+use Controller\ManipulateProduct;
+use Model\Product;
 
-//afisare formular
+//formular
+class ClientForm extends AbstractForm
+{
 
+    public function buildForm(): string
+    {
+        $form = $this->startForm($this->action, $this->method);
+        $form .= $this->intType("ID") . "\n";
+        $form .= $this->selectType("Currency", ['USD' => 'USD', 'EUR' => 'EUR', 'ZAR' => 'ZAR']) . "\n";
+        $form .= $this->submitType("Submit", "submit");
+        $form .= $this->endForm();
+        return $form;
+    }
+
+};
 $clientForm = new ClientForm('index.php', 'POST');
 echo $clientForm->buildForm();
+
+//the big deal /////////// logica dintre model si constructor /////////////
+$postID = verificareDate($_POST['ID']);
+
+$product = new Product($postID, $_POST['Currency']);
+$productController = new ManipulateProduct;
+
 //if Id inexistent, eroare : ID-ul produsului nu exista in stocul nostru
 
-//show updated table Product
-
-//afisare formular
-
 //afisare produs selectat cu pret si tva, extrase direct din tabela updatata.
-if (isset($_POST['ID'])) {
-    $table->ShowProduct();
+
+//preventXSS la ID
+function testImput($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    return htmlspecialchars($data);
 }
-$table->vatTax();
-$table->currencyCases();
+function verificareDate($x)
+{
+    if (!empty($x)) {
+        $x = testImput($x);
+        return $x;
+    }
+}
