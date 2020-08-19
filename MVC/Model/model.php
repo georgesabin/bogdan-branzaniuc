@@ -7,56 +7,25 @@ Vei avea un model Product, pentru simplitate,
 adauga in el si conexiunea la baza de date. Scapi de clasa ConnectBdate. */
 namespace Model;
 
-use PDO;
+include_once 'connectPdo.php';
+use Model\ConnectPdo;
 
-class Product
+class Product extends ConnectPdo
 {
-    private $postId;
-    private $postCurrency;
+    private $postId = '';
+    private $postCurrency = '';
     public function __construct($postId, $postCurrency)
     {
-        $this->postId = $post;
-        $this->postSelect = $postSelect;
+        $this->postId = $postId;
+        $this->postCurrency = $postCurrency;
     }
-    //conectarea la baza de date
-    public function connectDb()
-    {
-        {
-            $servername = 'localhost';
-            $username = 'root';
-            $password = '';
 
-            try {
-                $conn = new PDO("mysql:host=$servername;dbname=Stoc", $username, $password);
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                //echo 'Conectat cu succes!' . "</br>";
-                return $conn;
-
-            } catch (PDOException $e) {
-                echo 'Conectare esuata: ' . $e->getMessage();
-            }
-        }
-    }
-    //functiile de afisare
-    public function showTable(): void
-    {
-        $pdo = $this->connectDb();
-
-        $tableProduct = $pdo->query("SELECT * FROM Product")->fetchAll();
-
-        foreach ($tableProduct as $product) {
-            echo "id produs: " . $product['id_product'] . "&nbsp &nbsp &nbsp";
-            echo "pret: " . $product['price'] . "&nbsp &nbsp &nbsp";
-            echo "tva: " . $product['vat'] . "&nbsp &nbsp &nbsp";
-            echo "currency: " . $product['currency_code'] . "</br>";
-        }
-    }
-    public function ShowProduct(): void
+    public function showProduct(): void
     {
 
         $pdo = $this->connectDb();
 
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE id=:id");
+        $stmt = $pdo->prepare("SELECT * FROM product WHERE id_product=:id");
         $stmt->execute(['id' => $this->postId]);
         $product = $stmt->fetch();
 
@@ -72,7 +41,7 @@ class Product
     {
         $pdo = $this->connectDb();
 
-        $product = $pdo->query("SELECT * FROM Product")->fetchAll();
+        $product = $pdo->query("SELECT * FROM product")->fetchAll();
         // aici le schimb mereu pe toate ca sa consolidez bine functia de tva,
         // daca completeaza cineva cumva in 2 locuri diferite, sa dea un refresh la toate tva-urile
         foreach ($product as $key => $value) {
@@ -80,7 +49,7 @@ class Product
             try {
                 $data = [
                     'vat' => $tva,
-                    'id_product' => $id,
+                    'id_product' => $this->postId,
                 ];
                 $sql = "UPDATE Product SET vat=:vat WHERE id_product=:id_product";
                 $stmt = $pdo->prepare($sql);
@@ -95,11 +64,13 @@ class Product
     {
         $pdo = $this->connectDb();
 
-        $stmt = $pdo->prepare("SELECT price FROM users WHERE id=:id");
+        $stmt = $pdo->prepare("SELECT price FROM product WHERE id_product=:id");
         $stmt->execute(['id' => $this->postId]);
         $product = $stmt->fetch();
 
-        $currentCurrency = $product['currency_code'];
+        $stmt1 = $pdo->prepare("SELECT currency_code FROM product WHERE id_product=:id");
+        $stmt1->execute(['id' => $this->postId]);
+        $currentCurrency = $stmt1->fetch();
 
         if ($this->postCurrency == "USD" && $currentCurrency == "EUR") {
 
@@ -127,15 +98,13 @@ class Product
         $conn = $this->connectDb();
         $product = $conn->query("SELECT * FROM product")->fetchAll();
 
-        $pretNou = $calculCaz;
-
         try {
             $data = [
-                'price' => $pretNou,
-                'currencyCode' => $postCurrency,
-                'id' => $postId,
+                'price' => $calculCaz,
+                'currencyCode' => $this->postCurrency,
+                'id' => $this->postId,
             ];
-            $sql = "UPDATE users SET price=:price, currencyCode=:currencyCode, WHERE id=:id";
+            $sql = "UPDATE users SET price=:price, currency_code=:currencyCode, WHERE id=:id";
             $stmt = $pdo->prepare($sql);
             $stmt->execute($data);
 

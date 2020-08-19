@@ -1,50 +1,29 @@
 <?php
-include_once 'abstract_form.php';
+
 include_once '../Model/model.php';
 include_once '../Controller/controller.php';
-use Controller\AbstractForm;
+include_once 'ClientForm.php';
+include_once '../Model/tableProduct.php';
+include_once 'helper.php';
 use Controller\ManipulateProduct;
 use Model\Product;
-
+use Model\TableProduct;
+use View\ClientForm;
+use View\Helper;
+//tabela
+$table = new TableProduct;
+$table->showTable();
 //formular
-class ClientForm extends AbstractForm
-{
-
-    public function buildForm(): string
-    {
-        $form = $this->startForm($this->action, $this->method);
-        $form .= $this->intType("ID") . "\n";
-        $form .= $this->selectType("Currency", ['USD' => 'USD', 'EUR' => 'EUR', 'ZAR' => 'ZAR']) . "\n";
-        $form .= $this->submitType("Submit", "submit");
-        $form .= $this->endForm();
-        return $form;
-    }
-
-};
-$clientForm = new ClientForm('index.php', 'POST');
+$clientForm = new ClientForm('view.php', 'POST');
 echo $clientForm->buildForm();
 
-//the big deal /////////// logica dintre model si constructor /////////////
-$postID = verificareDate($_POST['ID']);
+//verificare date
 
-$product = new Product($postID, $_POST['Currency']);
-$productController = new ManipulateProduct;
+if (isset($_POST["ID"])) {
+
+    $postId = Helper::verificareDate($_POST["ID"]);
+    $product = new Product($postId, $_POST['Currency']);
+    $productController = new ManipulateProduct($product);
+}
 
 //if Id inexistent, eroare : ID-ul produsului nu exista in stocul nostru
-
-//afisare produs selectat cu pret si tva, extrase direct din tabela updatata.
-
-//preventXSS la ID
-function testImput($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    return htmlspecialchars($data);
-}
-function verificareDate($x)
-{
-    if (!empty($x)) {
-        $x = testImput($x);
-        return $x;
-    }
-}
