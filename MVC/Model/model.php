@@ -8,10 +8,14 @@ adauga in el si conexiunea la baza de date. Scapi de clasa ConnectBdate. */
 namespace Model;
 
 include_once 'connectPdo.php';
+include_once '../Helper/helper.php';
+use Helper\Helper;
 use Model\ConnectPdo;
 
 class Product extends ConnectPdo
 {
+    const Tabela_b_Date = "product";
+
     private $postId = '';
     private $postCurrency = '';
     public function __construct($postId, $postCurrency)
@@ -20,20 +24,32 @@ class Product extends ConnectPdo
         $this->postCurrency = $postCurrency;
     }
 
+    private function numberOfProducts(): int
+    {
+        $pdo = $this->connectDb();
+        $product = $pdo->query(sprintf("SELECT * FROM %s", self::Tabela_b_Date))->fetchAll();
+        return count($product);
+    }
     public function showProduct(): void
     {
 
         $pdo = $this->connectDb();
 
-        $stmt = $pdo->prepare("SELECT * FROM product WHERE id_product=:id");
+        $stmt = $pdo->prepare(sprintf("SELECT * FROM  %s WHERE id_product=:id", self::Tabela_b_Date));
         $stmt->execute(['id' => $this->postId]);
         $product = $stmt->fetch();
 
-        echo "product ID:" . $product['id_product'] . "</br>";
-        echo "product name:" . $product['name'] . "</br>";
-        echo "product price:" . $product['price'] . "</br>";
-        echo "vat:" . $product['vat'] . "</br>";
-        echo "currency:" . $product['currency_code'] . "</br>";
+        if ($this->postId <= Helper::numberOfProducts($pdo)) {
+            echo "product ID:" . $product['id_product'] . "</br>";
+            echo "product name:" . $product['name'] . "</br>";
+            echo "product price:" . $product['price'] . "</br>";
+            echo "vat:" . $product['vat'] . "</br>";
+            echo "currency:" . $product['currency_code'] . "</br>";
+        } elseif ($this->postId > Helper::numberOfProducts($pdo)) {
+            echo "ID-ul introdus nu reprezinta nici un produs din tabela";
+        } elseif ($this->postId != int) {
+            echo "be serious...";
+        }
 
     }
     //functii de editare a bazei de date
@@ -41,9 +57,8 @@ class Product extends ConnectPdo
     {
         $pdo = $this->connectDb();
 
-        $product = $pdo->query("SELECT * FROM product")->fetchAll();
-        // aici le schimb mereu pe toate ca sa consolidez bine functia de tva,
-        // daca completeaza cineva cumva in 2 locuri diferite, sa dea un refresh la toate tva-urile
+        $product = $pdo->query(sprintf("SELECT * FROM %s", self::Tabela_b_Date))->fetchall();
+
         foreach ($product as $key => $value) {
             $tva = 0.19 * $value['price'];
             try {
@@ -51,7 +66,7 @@ class Product extends ConnectPdo
                     'vat' => $tva,
                     'id_product' => $this->postId,
                 ];
-                $sql = "UPDATE Product SET vat=:vat WHERE id_product=:id_product";
+                $sql = sprintf("UPDATE %s SET vat=:vat WHERE id_product=:id_product", self::Tabela_b_Date);
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute($data);
             } catch (PDOException $e) {
@@ -64,17 +79,15 @@ class Product extends ConnectPdo
     {
         $pdo = $this->connectDb();
 
-        $stmt = $pdo->prepare("SELECT price FROM product WHERE id_product=:id");
+        $stmt = $pdo->prepare(sprintf("SELECT price, currency_code  FROM %s WHERE id_product=:id", self::Tabela_b_Date));
         $stmt->execute(['id' => $this->postId]);
         $product = $stmt->fetch();
 
-        $stmt1 = $pdo->prepare("SELECT currency_code FROM product WHERE id_product=:id");
-        $stmt1->execute(['id' => $this->postId]);
-        $currentCurrency = $stmt1->fetch();
+        $currentCurrency = $product['currency_code'];
 
         if ($this->postCurrency == "USD" && $currentCurrency == "EUR") {
 
-            $this->operateTheCase(usdtoEur($product['price']));
+            $this->operateTheCase($this->usdtoEur($product['price']));
 
         } elseif ($this->postCurrency == "EUR" && $currentCurrency == "USD") {
             $this->operateTheCase($this->eurtoUsd($product['price']));
@@ -95,8 +108,8 @@ class Product extends ConnectPdo
     }
     private function operateTheCase($calculCaz): void
     {
-        $conn = $this->connectDb();
-        $product = $conn->query("SELECT * FROM product")->fetchAll();
+        $pdo = $this->connectDb();
+        $product = $pdo->query(sprintf("SELECT * FROM %s", self::Tabela_b_Date))->fetchAll();
 
         try {
             $data = [
@@ -104,7 +117,7 @@ class Product extends ConnectPdo
                 'currencyCode' => $this->postCurrency,
                 'id' => $this->postId,
             ];
-            $sql = "UPDATE users SET price=:price, currency_code=:currencyCode, WHERE id=:id";
+            $sql = "UPDATE product SET price=:price, currency_code=:currencyCode WHERE id_product=:id";
             $stmt = $pdo->prepare($sql);
             $stmt->execute($data);
 
@@ -121,11 +134,11 @@ class Product extends ConnectPdo
     {
         return $pretCurent * $raportUsdEur;
     }
-    private function eurtoZar(float $pretCurent, float $raportEurZar = 20.68): float
+    private function eurtoZar(float $pretCurent, float $raportEurZar = 0.048): float
     {
         return $pretCurent * $raportEurZar;
     }
-    private function zartoEur(float $pretCurent, float $raportZarEur = 0.048): float
+    private function zartoEur(float $pretCurent, float $raportZarEur = 20.68): float
     {
         return $pretCurent * $raportZarEur;
     }

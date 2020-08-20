@@ -8,7 +8,7 @@ class TableProduct extends ConnectPdo
     {
         $pdo = $this->connectDb();
 
-        $tableProduct = $pdo->query("SELECT * FROM Product")->fetchAll();
+        $tableProduct = $pdo->query("SELECT * FROM product")->fetchAll();
 
         foreach ($tableProduct as $product) {
             echo "id produs: " . $product['id_product'] . "&nbsp &nbsp &nbsp";
