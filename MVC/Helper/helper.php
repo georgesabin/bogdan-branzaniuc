@@ -3,12 +3,6 @@ namespace Helper;
 
 class Helper
 {
-    public static function numberOfProducts($pdo): int
-    {
-        
-        $product = $pdo->query("SELECT * FROM product")->fetchAll();
-        return count($product);
-    }
     private static function testInput($data)
     {
         $data = trim($data);

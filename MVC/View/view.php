@@ -14,6 +14,10 @@ use model\Product;
 
 if (isset($_POST['ID'])) {
     $postId = Helper::verificareDate($_POST["ID"]);
+    if (is_numeric($_POST['ID']) == false) {
+        echo "be serious...";
+        exit;
+    }
     $product = new Product($postId, $_POST['Currency']);
     $productController = new ManipulateProduct($product);
 

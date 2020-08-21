@@ -9,7 +9,6 @@ namespace Model;
 
 include_once 'connectPdo.php';
 include_once '../Helper/helper.php';
-use Helper\Helper;
 use Model\ConnectPdo;
 
 class Product extends ConnectPdo
@@ -39,16 +38,15 @@ class Product extends ConnectPdo
         $stmt->execute(['id' => $this->postId]);
         $product = $stmt->fetch();
 
-        if ($this->postId <= Helper::numberOfProducts($pdo)) {
+        if ($product != false) {
             echo "product ID:" . $product['id_product'] . "</br>";
             echo "product name:" . $product['name'] . "</br>";
             echo "product price:" . $product['price'] . "</br>";
             echo "vat:" . $product['vat'] . "</br>";
             echo "currency:" . $product['currency_code'] . "</br>";
-        } elseif ($this->postId > Helper::numberOfProducts($pdo)) {
+        } else {
+
             echo "ID-ul introdus nu reprezinta nici un produs din tabela";
-        } elseif ($this->postId != int) {
-            echo "be serious...";
         }
 
     }
