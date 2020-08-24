@@ -14,7 +14,7 @@ use model\Product;
 
 if (isset($_POST['ID'])) {
     $postId = Helper::verificareDate($_POST["ID"]);
-    if (is_numeric($_POST['ID']) == false) {
+    if (is_numeric($postId) == false) {
         echo "be serious...";
         exit;
     }

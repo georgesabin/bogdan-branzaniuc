@@ -55,22 +55,23 @@ class Product extends ConnectPdo
     {
         $pdo = $this->connectDb();
 
-        $product = $pdo->query(sprintf("SELECT * FROM %s", self::Tabela_b_Date))->fetchall();
+        $stmt = $pdo->prepare(sprintf("SELECT * FROM  %s WHERE id_product=:id", self::Tabela_b_Date));
+        $stmt->execute(['id' => $this->postId]);
+        $product = $stmt->fetch();
 
-        foreach ($product as $key => $value) {
-            $tva = 0.19 * $value['price'];
-            try {
-                $data = [
-                    'vat' => $tva,
-                    'id_product' => $this->postId,
-                ];
-                $sql = sprintf("UPDATE %s SET vat=:vat WHERE id_product=:id_product", self::Tabela_b_Date);
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute($data);
-            } catch (PDOException $e) {
-                die("ERROR: Could not able to execute $sql. " . $e->getMessage());
-            }
+        $tva = 0.19 * $product['price'];
+        try {
+            $data = [
+                'vat' => $tva,
+                'id_product' => $this->postId,
+            ];
+            $sql = sprintf("UPDATE %s SET vat=:vat WHERE id_product=:id_product", self::Tabela_b_Date);
+            $stmt1 = $pdo->prepare($sql);
+            $stmt1->execute($data);
+        } catch (PDOException $e) {
+            die("ERROR: Could not able to execute $sql. " . $e->getMessage());
         }
+
     }
     #Cazurile perechilor valutare
     public function currencyCases(): void
