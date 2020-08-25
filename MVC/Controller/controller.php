@@ -11,7 +11,6 @@ class ManipulateProduct
 
     public function errorID(): void
     {
-// to be continued
     }
 
     public function showTable()

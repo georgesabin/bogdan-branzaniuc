@@ -17,7 +17,7 @@ abstract class AbstractForm
 
     protected function startForm(string $action, string $method = 'GET'): string
     {
-        return sprintf('<form action="%s" method="%s">', $action, $method);
+        return sprintf('<form action="%s" method="%s" >', $action, $method);
     }
 
     protected function endForm(): string
@@ -25,18 +25,17 @@ abstract class AbstractForm
         return '</form>';
     }
 
-    protected function selectType(string $name, array $options): string
+    protected function selectType(string $name, array $options, string $lable): string
     {
-        $select = '<select name = "' . $name . '">';
+        $select = '<select name = " ' . $name . ' " lable= " ' . $lable . ' ">';
 
         foreach ($options as $value => $label) {
             if (!$value) {
                 continue;
             }
 
-            $select .= sprintf('<option value="%s">%s</option> onchange="PostName.submit()">;', $value, $label);
+            $select .= sprintf('<option value="%s">%s</option>', $value, $label);
         }
-
         $select .= '</select>';
 
         return $select;
