@@ -10,8 +10,6 @@ class Product extends ConnectPdo
     public function showProduct(): array
     {
         $pdo = $this->connectDb();
-        $product = $pdo->query(sprintf("SELECT * FROM %s", self::TabeleInventar))->fetchAll();
-        return $product;
-        var_dump($product);
+        return $pdo->query(sprintf("SELECT * FROM %s ", self::TabeleInventar))->fetchAll();
     }
 }
