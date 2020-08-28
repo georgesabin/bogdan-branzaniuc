@@ -36,4 +36,15 @@ class Helper
 
         return $form;
     }
+    public static function actionButton($action, $name, $method, $lable)
+    {
+        $button = sprintf('<form action="%s" method="%s">', $action, $method);
+        $button .= sprintf(' <button type="submit" name="%s" formaction="%s">%s</button>', $name, $action, $lable);
+        $button .= '</form>';
+        return $button . "</br>";
+    }
+    public static function deleteProductButton($action, $method)
+    {
+
+    }
 }

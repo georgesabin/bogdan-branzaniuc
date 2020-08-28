@@ -2,23 +2,20 @@
 namespace View;
 
 session_start();
-
-//aici se afiseaza magazinul cu lista de produse + butonul "spre cosul de cumparaturi"
-
+include_once '../Helper/helper.php';
 include_once '../Model/product.php';
 include_once '../Controller/controller.php';
 use Controller\ManipulateProduct;
+use Helper\Helper;
 use Model\Product;
 
-$button = '<form action="shoppingCartView.php" method="POST">';
-$button .= ' <button type="submit" formaction="shoppingCartView.php">See your Shopping Cart</button>';
-$button .= '</form>';
-echo $button . "</br>";
+echo Helper::actionButton("shoppingCartView.php", "see shopping cart", "POST", "See your Shopping Cart");
 
 $productConn = new Product;
 $inventar = new ManipulateProduct($productConn);
 
 $inventar->showProduct();
-
-$_SESSION['shopping cart'][] = [$_POST["productId"], $_POST["quantity"]];
-var_dump($_SESSION['shopping cart']);
+if ($_POST["productId"] != null) {
+    $_SESSION['shopping cart'][] = ["id" => $_POST["productId"], "quantity" => $_POST["quantity"], "color" => $_POST["color"], "model" => $_POST["model"]];
+}
+//var_dump($_SESSION['shopping cart']);

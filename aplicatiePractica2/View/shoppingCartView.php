@@ -3,5 +3,7 @@ namespace View;
 
 include_once '../Controller/ScartController.php';
 use Controller\ShoppingCart;
-
-$shoppingCart = new ShoppingCart($_SESSION['shopping cart']);
+if (isset($_SESSION['shopping cart'])) {
+    $shoppingCart = new ShoppingCart($_SESSION['shopping cart']);
+    $shoppingCart->showShoppingCart();
+}
