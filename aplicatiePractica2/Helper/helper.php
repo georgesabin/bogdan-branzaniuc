@@ -50,11 +50,25 @@ class Helper
     public static function addOrRemoveQty($actionPage, $addName, $removeName)
     {
 //-/+ , cu optiunea de input manual, in caz ca magazinul vinde o scobitoare si clientul vrea 100 de scobitori.
-        $form = sprintf('<form action="%s">', $actionPage);
-        $form .= '<label for="quantity">Quantity (between 1 and 5):</label>';
-        $form .= '<input type="number" id="quantity" name="quantity" min="1" max="100">';
-        $form .= sprintf('<input type="submit" value="add" name="%s" >', $addName);
-        $form .= sprintf('<input type="submit" value="remove" name="$s" ></form>', $removeName);
+        $form = sprintf('<form action="%s" method="POST">', $actionPage);
+        $form .= '<label for="quantity">add/remove quantity: </label>';
+        $form .= '<input type="number" id="quantity" name="quantity" min="1" max="100" required>'; //aici se pot face modificari mai user-friendly
+        $form .= sprintf('<input type="submit" value="add" name="%s">', $addName);
+        $form .= sprintf('<input type="submit" value="remove" name="%s"> </form>', $removeName);
         return $form;
     }
+    private static function testInput($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        return htmlspecialchars($data);
+    }
+    public static function verificareDate($testSpot)
+    {
+        if (!empty($testSpot)) {
+            $testSpot = Helper::testInput($testSpot);
+            return $testSpot;
+        }
+    }
+    
 }
