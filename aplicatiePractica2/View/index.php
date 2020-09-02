@@ -2,6 +2,7 @@
 namespace View;
 
 session_start();
+include_once '../inc/header.php';
 include_once '../Helper/helper.php';
 include_once '../Model/product.php';
 include_once '../Controller/controller.php';
@@ -15,7 +16,7 @@ $productConn = new Product;
 $inventar = new ManipulateProduct($productConn);
 
 $inventar->showProduct();
-if ($_POST["productId"] != null) {
+if (isset($_POST["productId"])) {
     $_SESSION['shopping cart'][] = ["id" => $_POST["productId"], "quantity" => $_POST["quantity"], "color" => $_POST["color"], "model" => $_POST["model"]];
     // var_dump($_SESSION['shopping cart']);
     // id = id , color = color si model = model

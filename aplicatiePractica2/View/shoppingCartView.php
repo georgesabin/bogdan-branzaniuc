@@ -1,6 +1,6 @@
 <?php
 namespace View;
-
+include_once '../inc/header.php';
 include_once '../Helper/helper.php';
 include_once '../Controller/ScartController.php';
 include_once '../Model/ScartModel.php';
