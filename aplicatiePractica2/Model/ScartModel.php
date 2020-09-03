@@ -9,7 +9,7 @@ class ShoppingCartModel extends ConnectPdo
 {
     const TableInventar = "inventar";
 
-    public function dbSelect(int $idSpot): array
+    public function getProduct(int $idSpot): array
     {
         $pdo = $this->connectDb();
         return $pdo->query(sprintf("SELECT * FROM %s WHERE id_product=$idSpot", self::TableInventar))->fetch();

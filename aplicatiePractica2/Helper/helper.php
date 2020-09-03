@@ -49,7 +49,6 @@ class Helper
     }
     public static function addOrRemoveQty($actionPage, $addName, $removeName)
     {
-//-/+ , cu optiunea de input manual, in caz ca magazinul vinde o scobitoare si clientul vrea 100 de scobitori.
         $form = sprintf('<form action="%s" method="POST">', $actionPage);
         $form .= '<label for="quantity">add/remove quantity: </label>';
         $form .= '<input type="number" id="quantity" name="quantity" min="1" max="100" required>'; //aici se pot face modificari mai user-friendly
@@ -57,7 +56,7 @@ class Helper
         $form .= sprintf('<input type="submit" value="remove" name="%s"> </form>', $removeName);
         return $form;
     }
-    private static function testInput($data)
+    private static function testInput($data): string
     {
         $data = trim($data);
         $data = stripslashes($data);
@@ -70,5 +69,17 @@ class Helper
             return $testSpot;
         }
     }
-    
+    public static function emailForm($actionPage, $name, $method)
+    {
+        $form = sprintf('<form action="%s" method="%s"', $actionPage, $method);
+        $form .= '<lable for="email"> Write your email here: </lable><input type="email" name="email" required><br>';
+        $form .= sprintf('<input type="submit" value="Submit email" name="%s"><br>', $name);
+        return $form;
+    }
+    public static function sendEmail($postEmail)
+    {
+        $msg = "your order was successfully registerd";
+        $msg = wordwrap($msg, 70);
+        mail($postEmail, "Thank you for buying from us", $msg);
+    }
 }
