@@ -29,31 +29,45 @@ class ShoppingCart
         $grandTotal = 0;
 
         foreach ($this->shoppingCart as $key => $value) {
-            $product = $this->modelSelect->getProduct($value['id']);
 
+            $product = $this->modelSelect->getProduct($value['id']);
             $priceQty = $product['price'] * $value['quantity'];
             $vat = round(0.19 * $priceQty, 2);
+            $productImagePath = "default";
+            if ($value['model'] == "poker_dek" && $value['color'] == "red") {
+                $productImagePath = $product['img4'];
+            } elseif ($value['model'] == "cardistry_dek" && $value['color'] == "red") {
+                $productImagePath = $product['img3'];
+            } elseif ($value['model'] == "poker_dek" && $value['color'] = "dark") {
+                $productImagePath = $product['img2'];
+            } elseif ($value['model'] == "cardistry_dek" && $value['color'] = "dark") {
+                $productImagePath = $product['img1'];
+            }
+
             //$picture = $product['picture'];
             // product boorstrap
             ?>
-<html>
-           <div>
+            <div class='container'>
+            <div class="row">
+           <div class="col-sm">
             <div><?php echo Helper::actionButton("shoppingCartView.php", "deleteProduct" . $key, "POST", "delete this article from shopping cart"); ?></div>
-            <h1><?php echo "product name: " . $product['name'] . "</br>"; ?></h1>
-            <h5><?php echo "quantity: " . $value['quantity']; ?></h5>
+            <h1><?php echo "product name: " . $product['name'] . self::currency . "</br>"; ?></h1>
             <?php echo Helper::addOrRemoveQty("shoppingCartView.php", "add" . $key, "remove" . $key) . "</br>"; ?>
-            <?php echo self::currency . "</br>"; ?>
-            <?php echo "total price: " . $priceQty . " "; ?>
-            <?php echo self::currency . "</br>"; ?>
-            <?php echo "vat: " . $vat . " " . self::currency . "</br>"; ?>
+            <h5> <?php echo "price: " . $product['price'] . self::currency . "</br>"; ?></h5>
+            <h6><?php echo "quantity: " . $value['quantity']; ?></h6>
+            <h6><?php echo "total price: " . $priceQty . self::currency; ?></h6>
+            <h6><?php echo "vat: " . $vat . " " . self::currency . "</br>"; ?></h6>
             <?php echo "model: " . $value['model'] . "</br>"; ?>
-            <?php echo "color type: " . $value['color'] . "</br>"; ?>
+            <?php echo "color: " . $value['color'] . "</br>"; ?>
             <?php echo $product['edition'] == false ? "unlimited " : " limited "; ?>
             <?php echo " edition " . "</br>"; ?>
-            <?php echo $product['in_stock'] == true ? "in stock" . "</br>" : "out of stock (takes 4 more days to deliver)" . "</br>"; ?>
-            <?php echo $product['producer'] . "</br></br></br></br></br></br></br>"; ?>
+            <?php echo $product['in_stock'] == true ? "product in stock" . "</br>" : "out of stock (takes 4 more days to deliver)" . "</br>"; ?>
+            <?php echo "producer: " . $product['producer'] . "</br></br></br></br></br></br></br>"; ?>
             </div>
-</html>
+            <div class="col-md-4">
+            <img src=<?php echo $productImagePath; ?> class="img-fluid" width = "100%" alt="test-image">
+            </div>
+            </div>
 <?php
 }
         $total += $priceQty;
@@ -65,7 +79,8 @@ class ShoppingCart
 <html>
         <?php echo "total: " . $total . " " . self::currency . "</br>"; ?>
         <?php echo "Vat: " . $totalVat . " " . self::currency . "</br>"; ?>
-        <?php echo $total < 200 ? " the transport fee is $transport" . self::currency . "for orders under $freeTransportLimit" . self::currency . "</br>" : "transport fee: " . $transport = 0 . self::currency . "</br>"; ?>
+        <?php echo $total < 200 ? " the transport fee is $transport" . self::currency . "for orders under $freeTransportLimit" . self::currency . "</br>"
+        : "transport fee: " . $transport = 0 . self::currency . "</br>"; ?>
         <?php echo "grand total: " . $grandTotal . self::currency . "</br>"; ?>
 </html>
         <?php

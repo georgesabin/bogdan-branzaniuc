@@ -24,10 +24,10 @@ class Helper
         </select>';
         $form .= sprintf('<input type="hidden" name="productId" value="%u">', $id);
 
-        $form .= '<form> <label for="model">model:</label>
-        <select name="model" id="model">
-        <option value="poker deck">poker deck</option>
-        <option value="cardistry deck">cardistry deck</option>
+        $form .= '<form> <label for="model">choose the model: </label>
+        <select name="model" id="modeltype">
+        <option value="poker_dek">poker dek</option>
+        <option value="cardistry_dek">cardistry dek</option>
         </select>';
         $form .= '<input type="submit" value= "adauga in cos">
         </form>';
@@ -36,7 +36,7 @@ class Helper
     }
     public static function actionButton($action, $name, $method, $lable)
     {
-        $button = sprintf('<form action="%s" method="%s">', $action, $method);
+        $button = sprintf('<form class="btn " action="%s" method="%s">', $action, $method);
         $button .= sprintf(' <button type="submit" name="%s" formaction="%s">%s</button>', $name, $action, $lable);
         $button .= '</form>';
         return $button . "</br>";
@@ -78,8 +78,18 @@ class Helper
     }
     public static function sendEmail($postEmail)
     {
-        $msg = "your order was successfully registerd";
-        $msg = wordwrap($msg, 70);
-        mail($postEmail, "Thank you for buying from us", $msg);
+        $to_email = $postEmail;
+        $subject = "Simple Email Test via PHP";
+        $body = "Hi,nn This is test email send by PHP Script";
+        $headers = "From: bbranzaniuc53@gmail.com";
+        ini_set('SMTP', 'smtp.gmail.com');
+        ini_set('smtp_port', '587');
+        ini_set('sendmail_from', 'bbranzaniuc53@gmail.com');
+        ini_set('sendmail_path ', '"\"C:\wamp64\sendmail\sendmail.exe\" -t"');
+        if (mail($to_email, $subject, $body, $headers)) {
+            echo "Email successfully sent to $to_email...";
+        } else {
+            echo "Email sending failed...";
+        }
     }
 }

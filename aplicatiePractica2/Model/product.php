@@ -12,4 +12,9 @@ class Product extends ConnectPdo
         $pdo = $this->connectDb();
         return $pdo->query(sprintf("SELECT * FROM %s ", self::TabeleInventar))->fetchAll();
     }
+    public function connectingPdo()
+    {
+        $pdo = $this->connectDb();
+        return $pdo;
+    }
 }
