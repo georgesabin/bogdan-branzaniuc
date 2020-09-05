@@ -76,13 +76,13 @@ class ShoppingCart
         $totalVat = round(0.19 * $total, 2);
         // final cart boorstrap
         ?>
-<html>
+
         <?php echo "total: " . $total . " " . self::currency . "</br>"; ?>
         <?php echo "Vat: " . $totalVat . " " . self::currency . "</br>"; ?>
         <?php echo $total < 200 ? " the transport fee is $transport" . self::currency . "for orders under $freeTransportLimit" . self::currency . "</br>"
         : "transport fee: " . $transport = 0 . self::currency . "</br>"; ?>
         <?php echo "grand total: " . $grandTotal . self::currency . "</br>"; ?>
-</html>
+
         <?php
 }
     public function calculate()

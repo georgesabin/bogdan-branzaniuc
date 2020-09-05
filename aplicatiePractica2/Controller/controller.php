@@ -18,25 +18,6 @@ class ManipulateProduct
         $products = $this->productConn->showProduct();
         foreach ($products as $product) {
 
-            //insert large images in database as paths//
-            //little test
-            /* $pdo = $this->productConn->connectingPdo();
-            try {
-            $data = [
-            'id' => $product['id_product'],
-            'img1' => "'../assets/productimages/dark_c_d.png'",
-            'img2' => "'../assets/productimages/dark_p_d.png'",
-            'img3' => "'../assets/productimages/red_c_d.png'",
-            'img4' => "'../assets/productimages/red_p_d.png'",
-            ];
-
-            $sql = "UPDATE inventar SET img1=:img1 , img2=:img2 , img3=:img3 , img4=:img4 WHERE id_product=:id";
-            $stmt1 = $pdo->prepare($sql);
-            $stmt1->execute($data);
-            } catch (PDOException $e) {
-            die("ERROR: Could not able to execute $sql. " . $e->getMessage());
-            } */
-
             $price = $product['price'];
             $id = $product['id_product'];?>
             <div class="row">

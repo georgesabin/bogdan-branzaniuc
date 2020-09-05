@@ -14,7 +14,6 @@ class Product extends ConnectPdo
     }
     public function connectingPdo()
     {
-        $pdo = $this->connectDb();
-        return $pdo;
+        return $this->connectDb();
     }
 }
